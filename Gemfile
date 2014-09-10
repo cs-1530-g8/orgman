@@ -6,9 +6,11 @@ gem 'jbuilder', '~> 2.0'
 # Front-End
 gem 'jquery-rails'
 gem 'uglifier', '>= 1.3.0'
-gem 'sass-rails', '~> 4.0.3'
 gem 'turbolinks'
+gem 'sass-rails', '~> 4.0.3'
 gem 'haml'
+gem 'bootstrap-sass', '~> 3.2.0'
+gem 'autoprefixer-rails'
 
 group :development, :test do
   gem 'rspec-rails', '~> 2.14.2'
