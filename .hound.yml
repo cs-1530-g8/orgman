@@ -6,7 +6,8 @@ AllCops:
     - Rakefile
     - config.ru
   Exclude:
-    - db/schema.rb
+    - db/**/*
+    - config/**/*
 
 Style/StringLiterals:
   Enabled: false
