@@ -1,0 +1,12 @@
+# Hound Settings
+ShowCopNames: true
+
+AllCops:
+  Include:
+    - Rakefile
+    - config.ru
+  Exclude:
+    - db/schema.rb
+
+Style/StringLiterals:
+  Enabled: false
