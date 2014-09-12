@@ -4,8 +4,11 @@ gem 'rails', '4.1.4'
 gem 'jbuilder', '~> 2.0'
 gem 'draper', '~>1.3'
 gem 'paperclip'
-gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'rubocop', require: false
+
+# Authentication
+gem 'devise'
+gem 'bcrypt-ruby', '~> 3.0.0'
 
 # Front-End
 gem 'jquery-rails'
