@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :users
   get 'external/index'
+
+  devise_for :users
 
   root 'external#index'
 end
