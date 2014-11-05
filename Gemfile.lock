@@ -31,6 +31,7 @@ GEM
     ast (2.0.0)
     autoprefixer-rails (3.0.1.20140826)
       execjs
+    awesome_print (1.2.0)
     bcrypt (3.1.7)
     bcrypt-ruby (3.0.1)
     better_errors (2.0.0)
@@ -208,6 +209,7 @@ PLATFORMS
 
 DEPENDENCIES
   autoprefixer-rails
+  awesome_print
   bcrypt-ruby (~> 3.0.0)
   better_errors
   binding_of_caller

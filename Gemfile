@@ -23,6 +23,7 @@ gem 'autoprefixer-rails'
 group :development, :test do
   gem 'rspec-rails', '~> 2.14.2'
   gem 'sqlite3'
+  gem 'awesome_print'
 
   # Better Errors
   gem 'better_errors'
