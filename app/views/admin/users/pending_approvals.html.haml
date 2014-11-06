@@ -1,0 +1,13 @@
+%h1 Users Awaiting Approval
+
+%table
+  %thead
+    %th Email
+    %th Name
+    %th Approve
+
+  - @users.each do |user|
+    %tr
+      %td= user.email
+      %td= user.name
+      %td= link_to "yes", approve_user_path(id: user.id, approve: true)
