@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get 'index' => 'external#index', as: :external_index
-  get 'approve_users' => 'admin/users#approve_users', as: :approve_users
+  get 'pending_approvals' => 'admin/users#pending_approvals', as: :pending_approvals
+  get 'approve_user' => 'admin/users#approve_user', as: :approve_user
 
   # Add devise routes for users
   # devise_for :users
