@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get 'index' => 'external#index', as: :external_index
+  get 'approve_users' => 'admin/users#approve_users', as: :approve_users
 
   # Add devise routes for users
   # devise_for :users
