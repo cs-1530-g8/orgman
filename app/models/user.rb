@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   # Helpers ####################################################################
 
   def name
-    "#{first} #{last}"
+    "#{first_name} #{last_name}"
   end
 
   # Authentication #############################################################
