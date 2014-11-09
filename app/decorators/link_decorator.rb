@@ -18,11 +18,9 @@ class LinkDecorator < Draper::Decorator
     end
   end
 
-  def format_added_by
-    output = h.current_user.name
+  def render_remove_link
     if user_id == h.current_user.id
-      output.concat(h.link_to(' (remove)',
-                            h.deactivate_quick_link_path(h.current_user.id)))
+      h.link_to(' (remove) ', h.deactivate_quick_link_path(h.current_user.id))
     end
   end
 end
