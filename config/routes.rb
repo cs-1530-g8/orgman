@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'approve_user' => 'admin/users#approve_user', as: :approve_user
   get 'quick_links' => 'quick_links#index', as: :quick_links
   post 'create_quick_link' => 'quick_links#create', as: :create_quick_link
+  get 'deactivate_quick_link' => 'quick_links#deactivate', as: :deactivate_quick_link
 
   # Add devise routes for users
   # devise_for :users

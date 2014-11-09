@@ -18,10 +18,11 @@ class LinkDecorator < Draper::Decorator
     end
   end
 
-  def edit_button
+  def format_added_by
+    output = h.current_user.name
     if user_id == h.current_user.id
-      h.current_user.name + " (edit)"
+      output.concat(h.link_to(' (remove)',
+                            h.deactivate_quick_link_path(h.current_user.id)))
     end
   end
-
 end
