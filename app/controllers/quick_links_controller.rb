@@ -3,6 +3,8 @@ class QuickLinksController < ApplicationController
   username = 'pittdxc'
   api_key =  'R_d469a17c98cb6fb08631749d447bab82'
 
+  before_filter :authenticate_user!
+
   def index
     @links = Link.active()
     @new_link = Link.new
