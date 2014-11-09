@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   get 'index' => 'external#index', as: :external_index
   get 'pending_approvals' => 'admin/users#pending_approvals', as: :pending_approvals
   get 'approve_user' => 'admin/users#approve_user', as: :approve_user
+  get 'quick_links' => 'quick_links#index', as: :quick_links
+  post 'create_quick_link' => 'quick_links#create', as: :create_quick_link
 
   # Add devise routes for users
   # devise_for :users
