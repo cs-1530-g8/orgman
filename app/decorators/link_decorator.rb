@@ -10,9 +10,17 @@ class LinkDecorator < Draper::Decorator
   #     end
   #   end
 
+  def format_expiration
+    if expiration
+      expiration.strftime("%A, %B #{expiration.day.ordinalize} %Y")
+    else
+      'never'
+    end
+  end
+
   def edit_button
     if user_id == h.current_user.id
-      "You own this link!"
+      h.current_user.name + " (edit)"
     end
   end
 

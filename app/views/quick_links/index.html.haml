@@ -1,5 +1,8 @@
 %h1 Quick Links
-%ul
+%table{ class: 'table table-striped' }
+  %th Title
+  %th Expires
+  %th Added By
   =render partial: 'link', collection: @links, as: :link
 
 %h2 Add a new quick link
