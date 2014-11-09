@@ -7,6 +7,7 @@ class QuickLinksController < ApplicationController
 
   def index
     @links = Link.active()
+    @links = @links.decorate
     @new_link = Link.new
   end
 
