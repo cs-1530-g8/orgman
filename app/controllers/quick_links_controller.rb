@@ -12,6 +12,7 @@ class QuickLinksController < ApplicationController
 
   def create
     @new_link = Link.new(link_params)
+    @new_link.user_id = current_user.id
     @new_link.save
     redirect_to quick_links_path
   end
