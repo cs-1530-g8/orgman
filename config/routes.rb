@@ -1,10 +1,4 @@
 Rails.application.routes.draw do
-  get 'index' => 'external#index', as: :external_index
-  get 'pending_approvals' => 'admin/users#pending_approvals', as: :pending_approvals
-  get 'approve_user' => 'admin/users#approve_user', as: :approve_user
-  get 'quick_links' => 'quick_links#index', as: :quick_links
-  post 'create_quick_link' => 'quick_links#create', as: :create_quick_link
-  get 'deactivate_quick_link' => 'quick_links#deactivate', as: :deactivate_quick_link
 
   # Add devise routes for users
   # devise_for :users
@@ -30,6 +24,15 @@ Rails.application.routes.draw do
 
     post   'unlock'   => 'devise/unlocks#create',       as: :user_unlock
     get    'unlock'   => 'devise/unlocks#new',          as: :new_user_unlock
+  end
+
+  get 'pending_approvals' => 'admin/users#pending_approvals', as: :pending_approvals
+  get 'approve_user'      => 'admin/users#approve_user',      as: :approve_user
+
+  get 'index' => 'external#index', as: :external_index
+
+  resources :quick_links, except: [:show, :destroy, :edit, :update, :new] do
+    post :deactivate, on: :member
   end
 
   root 'external#index'
