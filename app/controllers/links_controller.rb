@@ -1,9 +1,8 @@
 class LinksController < ApplicationController
-
   before_filter :authenticate_user!
 
   def index
-    @links = Link.active()
+    @links = Link.active
     @links = @links.decorate
     @new_link = Link.new
   end
@@ -37,5 +36,4 @@ class LinksController < ApplicationController
   def link_params
     params.require(:link).permit(:name, :url, :expiration)
   end
-
 end
