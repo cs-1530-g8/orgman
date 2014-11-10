@@ -1,0 +1,6 @@
+%tr
+  %td=link_to(link.name, link.url, target: '_blank')
+  %td=link.format_expiration
+  %td
+    =current_user.name
+    =link.render_remove_link
