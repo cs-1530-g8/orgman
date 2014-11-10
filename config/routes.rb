@@ -31,7 +31,7 @@ Rails.application.routes.draw do
 
   get 'index' => 'external#index', as: :external_index
 
-  resources :quick_links, except: [:show, :destroy, :edit, :update, :new] do
+  resources :links, except: [:show, :destroy, :edit, :update, :new] do
     post :deactivate, on: :member
   end
 

@@ -1,4 +1,4 @@
-class QuickLinksController < ApplicationController
+class LinksController < ApplicationController
 
   before_filter :authenticate_user!
 
@@ -21,7 +21,7 @@ class QuickLinksController < ApplicationController
     @new_link.url = short.short_url
 
     @new_link.save
-    redirect_to quick_links_path
+    redirect_to links_path
   end
 
   def deactivate
@@ -29,7 +29,7 @@ class QuickLinksController < ApplicationController
     if link && link.user_id == current_user.id
       link.update_attribute(:expiration, Date.today - 1)
     end
-    redirect_to quick_links_path
+    redirect_to links_path
   end
 
   private
