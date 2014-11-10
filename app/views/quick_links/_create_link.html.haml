@@ -1,12 +1,12 @@
 =form_for(@new_link, url: create_quick_link_path) do |f|
 
   = f.label :name, 'Link Name'
-  = f.text_field :name, placeholder: 'Example Link'
+  = f.text_field :name, placeholder: 'Example Link', class: 'form-control'
 
   = f.label :url, 'Link URL'
-  = f.text_field :url, placeholder: 'http://example.com'
+  = f.text_field :url, placeholder: 'http://example.com', class: 'form-control'
 
   = f.label :expiration, 'Expiration Date'
-  = f.date_field :expiration, placeholder: '12/03/2020'
+  = f.date_field :expiration, placeholder: '12/03/2020', class: 'form-control'
 
-  = f.submit
+  = f.submit class: 'btn btn-primary'
