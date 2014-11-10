@@ -1,9 +1,4 @@
-require 'Date'
-
 class QuickLinksController < ApplicationController
-
-  username = 'pittdxc'
-  api_key =  'R_d469a17c98cb6fb08631749d447bab82'
 
   before_filter :authenticate_user!
 
@@ -14,8 +9,17 @@ class QuickLinksController < ApplicationController
   end
 
   def create
+    username = 'pittdxc'
+    api_key =  'R_d469a17c98cb6fb08631749d447bab82'
+
     @new_link = Link.new(link_params)
     @new_link.user_id = current_user.id
+
+    Bitly.use_api_version_3
+    bitly = Bitly.new(username, api_key)
+    short = bitly.shorten(@new_link.url)
+    @new_link.url = short.short_url
+
     @new_link.save
     redirect_to quick_links_path
   end

@@ -5,7 +5,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'draper', '~>1.3'
 gem 'paperclip'
 gem 'rubocop', require: false
-gem 'draper', '~> 1.3'
+gem 'bitly'
 
 # Authentication
 gem 'devise'
