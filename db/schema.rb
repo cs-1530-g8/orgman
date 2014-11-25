@@ -11,7 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141125215402) do
+ActiveRecord::Schema.define(version: 20141125222853) do
+
+  create_table "event_types", force: true do |t|
+    t.string   "name"
+    t.integer  "points_required"
+    t.integer  "percentage_attendance_required"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "events", force: true do |t|
+    t.string   "name"
+    t.date     "date"
+    t.integer  "fine"
+    t.boolean  "self_submit_attendance"
+    t.boolean  "self_submit_excuse"
+    t.integer  "semester"
+    t.integer  "event_type_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "links", force: true do |t|
     t.string   "name"
