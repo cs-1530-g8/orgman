@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141109025647) do
+ActiveRecord::Schema.define(version: 20141125215402) do
 
   create_table "links", force: true do |t|
     t.string   "name"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20141109025647) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "approved",               default: false, null: false
+    t.string   "position"
   end
 
   add_index "users", ["approved"], name: "index_users_on_approved"
