@@ -1,0 +1,13 @@
+-provide(:title, @event.name)
+%h1 #{@event.name}
+%p Date: #{format_date(@event.date)}
+%p Fine: #{@event.fine}
+%p Event Type: #{@event.event_type.name}
+%p #{@event.format_self_submit_attendance(current_member)}
+%p Semester: #{format_semester(@event.semester)}
+
+%h3 Present brothers
+=render partial: 'events/event_attendee', collection: @event.attended_members, as: :member
+
+%h3 Absent brothers
+=render partial: 'events/event_attendee', collection: @event.absent_members, as: :member

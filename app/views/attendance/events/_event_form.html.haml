@@ -1,0 +1,28 @@
+= form_for @event do |f|
+  = render 'shared/error_messages', object: f.object
+
+  = f.label :name, 'Event Name:'
+  = f.text_field :name
+
+  = f.label :date, 'Date:'
+  = f.date_select :date
+
+  = f.label :fine, 'Fine:'
+  = f.text_field :fine
+
+  = f.label :event_type_id, 'Event Type:'
+  - valid_event_types = @event.valid_event_types(@current_member)
+  = collection_select :event, :event_type_id, valid_event_types, :id, :name
+
+  = f.fields_for :attendances do |at|
+    = at.collection_select :member_ids, Member.active, :id, :name,
+      { selected: @event.attended_members.map { |member| member.id} },
+      { multiple: true }
+
+  = f.label :self_submit_attendance, 'Self-submited attendances permitted? '
+  = f.check_box :self_submit_attendance
+
+  = f.label :self_submit_excuse, 'Self-submited excuses permitted? '
+  = f.check_box :self_submit_excuse
+
+  = f.submit "Save"

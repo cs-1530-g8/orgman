@@ -1,0 +1,5 @@
+%h2 All event types
+=render partial: 'attendance/event_types/event_type_detail', collection: @event_types, as: :event_type
+
+%h2 Add a new event type
+= render partial: 'attendance/event_types/event_type_detail', locals: { event_type: @new_event_type }

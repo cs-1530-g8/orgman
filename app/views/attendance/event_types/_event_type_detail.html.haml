@@ -1,0 +1,21 @@
+= form_for event_type, html: {class: 'form-inline'} do |f|
+  = render 'shared/error_messages', object: f.object
+
+  .form-group
+    .input-group
+      = f.label :name, 'Name:'
+      = event_type.name_field
+
+  .form-group
+    .input-group
+      = f.label :points_required, 'Points required:'
+      = f.text_field :points_required, id: "event_type_#{event_type.id}_points_required", maxlength: '2', size: '2'
+
+  .form-group
+    .input-group
+      = f.label :percentage_attendance_required, 'Percentage attendance required:'
+      = f.text_field :percentage_attendance_required, id: "event_type_#{event_type.id}_percentage_attendance_required", maxlength: '3', size: '3'
+
+  = f.submit "Save", class: 'btn btn-primary'
+
+  = event_type.delete_link
