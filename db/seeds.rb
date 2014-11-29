@@ -7,6 +7,8 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 admin = User.create! first_name: 'Alex', last_name: 'Vallejo',
-                     email: 'vallejo.alex@gmail.com', password: 'password',
-                     password_confirmation: 'password'
+                     email: 'email@example.com', password: 'password',
+                     password_confirmation: 'password', approved: true
 admin.confirm!
+
+EventType.create(name: 'Miscellaneous')

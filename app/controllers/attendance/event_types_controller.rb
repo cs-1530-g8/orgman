@@ -36,10 +36,10 @@ class Attendance::EventTypesController < ApplicationController
   def delete
     @event_type = EventType.find(params[:id])
     if @event_type.destroy!
-        flash[:attention] = "\"#{@event_type.name}\" was deleted."
+        flash[:notice] = "\"#{@event_type.name}\" was deleted."
         redirect_to(event_types_path)
     else
-      flash[:attention] = "Deleting \"#{@event_type.name}\" failed."
+      flash[:alert] = "Deleting \"#{@event_type.name}\" failed."
       redirect_to(event_type_path)
     end
   end
