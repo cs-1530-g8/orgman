@@ -13,10 +13,9 @@ class Attendance::EventTypesController < ApplicationController
     @event_type = EventType.new(event_type_params)
 
     if @event_type.save
-      flash[:attention] = "#{@event_type.name} created successfully."
+      flash[:notice] = "#{@event_type.name} created successfully."
     else
-      flash[:attention] = "Sorry, there was a problem. #{@event_type.name}"
-                          + " was not created"
+      flash[:alert] = "\"#{@event_type.name}\" was not created"
     end
     @event_type = @event_type.decorate
     redirect_to(event_types_path)
@@ -24,14 +23,13 @@ class Attendance::EventTypesController < ApplicationController
 
   def update
     @event_type = EventType.find(params[:id])
-
-    if @event_type.update_attributes(event_type_params)
+    if @event_type.update(event_type_params)
       @event_type.reload
-      flash[:attention] = "#{@event_type.name} updated successfully."
-      redirect_to(event_type_path)
+      flash[:notice] = "#{@event_type.name} updated successfully."
+      redirect_to(event_types_path)
     else
-      flash[:attention] = "Updating #{@event_type.name} failed."
-      redirect_to(event_type_path)
+      flash[:alert] = "Updating #{@event_type.name} failed."
+      redirect_to(event_types_path)
     end
   end
 

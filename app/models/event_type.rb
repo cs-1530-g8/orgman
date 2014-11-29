@@ -4,6 +4,10 @@ class EventType < ActiveRecord::Base
 
   has_many :events
   validates :name, presence: true, length: { maximum: 50 }
+  #validates :points_required, length: {maximum: 2},
+  #          numericality: { only_integer: true }
+  #validates :percentage_attendance_required, length: {maximum: 3},
+  #          numericality: { only_integer: true }
 
   def required?
     self.points_required > 0 || self.percentage_attendance_required > 0

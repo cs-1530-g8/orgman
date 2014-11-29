@@ -24,7 +24,7 @@ class EventTypeDecorator < Draper::Decorator
 
       h.link_to 'Delete', {controller: :event_types, action: :delete,
                          id: event_type.id }, {confirm: message,
-                         class: 'btn btn-danger',
+                         class: 'btn btn-danger btn-sm',
                          id: "delete_button_#{event_type.id}"} end
   end
 end
