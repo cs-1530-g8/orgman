@@ -1,5 +1,5 @@
 = form_for attendance do |f|
-  = f.hidden_field :member_id, value: attendance.member_id
+  = f.hidden_field :user_id, value: attendance.user_id
   = f.hidden_field :event_id, value: attendance.event_id
   = f.hidden_field :present, value: true
-  = f.submit 'I attended this event'
+  = f.submit 'I attended this event', class: 'btn btn-primary btn-sm'

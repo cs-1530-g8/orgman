@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
                     default_url: '/images/:style/missing.png'
 
   # Scopes #####################################################################
+  scope :active, -> { where("status = 'active'") }
 
   # Associations ###############################################################
 
