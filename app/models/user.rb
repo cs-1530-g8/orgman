@@ -13,14 +13,22 @@ class User < ActiveRecord::Base
                     default_url: '/images/:style/missing.png'
 
   # Scopes #####################################################################
+
   scope :active, -> { where("status = 'active'") }
 
   # Associations ###############################################################
+
+  has_many :attendances
+  has_many :events, through: :attendances
 
   # Helpers ####################################################################
 
   def name
     "#{first_name} #{last_name}"
+  end
+
+  def total_attendance_points
+    self.attendances.where(present: true).count
   end
 
   # Authentication #############################################################

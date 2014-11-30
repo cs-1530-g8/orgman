@@ -1,11 +1,11 @@
-class LeaderboardController < ApplicationController
+class Attendance::LeaderboardController < ApplicationController
 
-  before_action :signed_in_member
+  before_action :authenticate_user!
 
   def index
-    sorted_members = Member.active.sort_by(&:total_attendance_points)
+    sorted_members = User.active.sort_by(&:total_attendance_points)
     sorted_members.reverse!
-    @members = MemberDecorator.decorate_collection(sorted_members)
+    @users = UserDecorator.decorate_collection(sorted_members)
   end
 
 end
