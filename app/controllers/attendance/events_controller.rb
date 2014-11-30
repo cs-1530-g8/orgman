@@ -1,25 +1,29 @@
 class Attendance::EventsController < ApplicationController
-
   include EventsHelper
   include ApplicationHelper
 
   before_action :authenticate_user!
-  before_action -> { member_can_edit_event(current_user, params[:id])},
-                only: [:edit]
-  before_action -> { unless member_can_edit_event_type(current_user, params[:event][:event_type_id])
-                        flash[:alert] = "Sorry you are not authorized to edit this event!"
-                        redirect_to event_path(event_id)
-                     end}, only: [:create, :update]
+  before_action -> { member_can_edit_event(current_user, params[:id]) },
+                   only: [:edit]
+  before_action -> {
+    unless member_can_edit_event_type(current_user,
+                                      params[:event][:event_type_id])
+      flash[:alert] = "Sorry you are not authorized to edit this event!"
+      redirect_to event_path(event_id)
+    end
+  }, only: [:create, :update]
 
+  # todo only events from current semester
   def index
-    #todo only events from current semester
     @events = Event.all.decorate
   end
 
   def show
     @event = Event.find(params[:id]).decorate
-    @attended_users = @event.attended_users.sort_by { |u| [u.last_name, u.first_name] }
-    @absent_users = @event.absent_users.sort_by { |u| [u.last_name, u.first_name] }
+    @attended_users = @event.attended_users.sort_by { |u| [u.last_name,
+                                                           u.first_name] }
+    @absent_users = @event.absent_users.sort_by { |u| [u.last_name,
+                                                       u.first_name] }
   end
 
   def new
@@ -35,7 +39,7 @@ class Attendance::EventsController < ApplicationController
     @event.semester = current_semester(Time.now.year)
 
     if @event.save
-      user_ids = params[:event][:attendances][:user_ids].reject{|s| s.blank?}
+      user_ids = params[:event][:attendances][:user_ids].reject{ |s| s.blank? }
       absent = User.active - User.find(user_ids)
 
       user_ids.each do |user_id|
@@ -64,8 +68,8 @@ class Attendance::EventsController < ApplicationController
       @event.reload
 
       user_ids = params[:event][:attendances][:user_ids].reject{|s| s.blank?}
-      old_present = Attendance.where(event_id: @event.id, present: true)
-        .map{|a| a.user_id.to_s}
+      old_present = Attendance.where(event_id: @event.id, present: true).
+        map { |a| a.user_id.to_s }
       new_present = user_ids - old_present
       new_absent = old_present - user_ids
 
@@ -83,12 +87,12 @@ class Attendance::EventsController < ApplicationController
                           successfully."
       redirect_to(@event)
     else
-      flash[:alert] = "There was problem updating the event. Try again";
-      render 'edit'
+      flash[:alert] = "There was problem updating the event. Try again"
+      redirect_to(edit_event_path(@event))
     end
   end
 
-  #todo Do we want to implement a destroy for events?
+  # todo Do we want to implement a destroy for events?
   def destroy
   end
 

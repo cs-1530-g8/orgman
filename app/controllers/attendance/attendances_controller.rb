@@ -1,5 +1,4 @@
 class Attendance::AttendancesController < ApplicationController
-
   before_action :authenticate_user!
 
   def update

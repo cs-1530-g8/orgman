@@ -1,5 +1,4 @@
 class EventDecorator < Draper::Decorator
-
   include EventsHelper
 
   delegate_all
@@ -20,11 +19,12 @@ class EventDecorator < Draper::Decorator
         if attendance.first.present == true
           'You attended this event'
         else
-          h.render partial: 'attendance/attendances/self_report', locals: {attendance: attendance.first}
+          h.render partial: 'attendance/attendances/self_report',
+            locals: { attendance: attendance.first }
         end
       end
     else
-     'You may not submit your own attendance for this event.'
+      'You may not submit your own attendance for this event.'
     end
   end
 

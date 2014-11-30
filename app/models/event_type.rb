@@ -1,5 +1,4 @@
 class EventType < ActiveRecord::Base
-
   before_save { self.name = name.titleize }
 
   has_many :events
@@ -26,8 +25,12 @@ class EventType < ActiveRecord::Base
     self.points_required = 0 && self.percentage_attendance_required = 0
   end
 
-  scope :required, -> {where("points_required > 0 OR
-                             percentage_attendance_required > 0").order(:name)}
-  scope :not_required, -> {where("points_required = 0 AND
-                                 percentage_attendance_required = 0").order(:name)}
+  scope :required, -> {
+    where("points_required > 0 OR percentage_attendance_required > 0").
+    order(:name)
+  }
+  scope :not_required, -> {
+    where("points_required = 0 AND percentage_attendance_required = 0").
+    order(:name)
+  }
 end

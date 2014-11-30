@@ -1,5 +1,5 @@
 module ApplicationHelper
-  #Returns the full title on a per-page basis
+  # Returns the full title on a per-page basis
   def full_title(page_title)
     base_title = "Pitt Delta Chi"
     if page_title.empty?
@@ -9,7 +9,7 @@ module ApplicationHelper
     end
   end
 
-  #Easily format dates in a single method for the entire application
+  # Easily format dates in a single method for the entire application
   def format_date(date)
     date.strftime("%b #{date.day.ordinalize}, %Y")
   end
