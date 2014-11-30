@@ -1,0 +1,7 @@
+%tr
+  %td #{user.name}
+  %td #{user.total_attendance_points}
+  - EventType.required.each do |type|
+    %td #{ user.attendance_count_for_event_type(type) }
+
+  %td #{ user.attendance_count_for_not_required }
