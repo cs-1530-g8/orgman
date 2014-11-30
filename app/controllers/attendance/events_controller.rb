@@ -1,13 +1,13 @@
-class EventsController < ApplicationController
+class Attendance::EventsController < ApplicationController
 
   include EventsHelper
   include ApplicationHelper
 
-  before_action :signed_in_member
-  before_action -> { member_can_edit_event(@current_member, params[:id])},
+  before_action :authenticate_user!
+  before_action -> { member_can_edit_event(current_user, params[:id])},
                 only: [:edit]
-  before_action -> { unless member_can_edit_event_type(@current_member, params[:event][:event_type_id])
-                        flash[:attention] = "Sorry you are not authorized to edit this event!"
+  before_action -> { unless member_can_edit_event_type(current_user, params[:event][:event_type_id])
+                        flash[:alert] = "Sorry you are not authorized to edit this event!"
                         redirect_to event_path(event_id)
                      end}, only: [:create, :update]
 
@@ -18,12 +18,14 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id]).decorate
+    @attended_users = @event.attended_users.sort_by { |u| [u.last_name, u.first_name] }
+    @absent_users = @event.absent_users.sort_by { |u| [u.last_name, u.first_name] }
   end
 
   def new
-    if @current_member.position == nil || @current_member.position == ''
-      flash[:attention] = 'You must be a chairman or the secretary to add an event'
-      redirect_to signin_path
+    if current_user.position.blank?
+      flash[:alert] = 'You must be a chairman or the secretary to add an event'
+      redirect_to events_path
     end
     @event = Event.new.decorate
   end
@@ -33,18 +35,18 @@ class EventsController < ApplicationController
     @event.semester = current_semester(Time.now.year)
 
     if @event.save
-      member_ids = params[:event][:attendances][:member_ids].reject{|s| s.blank?}
-      absent = Member.active - Member.find(member_ids)
+      user_ids = params[:event][:attendances][:user_ids].reject{|s| s.blank?}
+      absent = User.active - User.find(user_ids)
 
-      member_ids.each do |member_id|
-        Attendance.create(member_id: member_id, event_id: @event.id, present: true)
+      user_ids.each do |user_id|
+        Attendance.create(user_id: user_id, event_id: @event.id, present: true)
       end
 
-      absent.each do |member|
-        Attendance.create(member: member, event_id: @event.id, present: false)
+      absent.each do |user|
+        Attendance.create(user: user, event_id: @event.id, present: false)
       end
 
-      flash[:attention] = "#{@event.name} on #{format_date @event.date} created
+      flash[:notice] = "#{@event.name} on #{format_date @event.date} created
                            successfully."
     end
 
@@ -61,26 +63,27 @@ class EventsController < ApplicationController
     if @event.update_attributes(event_params)
       @event.reload
 
-      member_ids = params[:event][:attendances][:member_ids].reject{|s| s.blank?}
+      user_ids = params[:event][:attendances][:user_ids].reject{|s| s.blank?}
       old_present = Attendance.where(event_id: @event.id, present: true)
-        .map{|a| a.member_id.to_s}
-      new_present = member_ids - old_present
-      new_absent = old_present - member_ids
+        .map{|a| a.user_id.to_s}
+      new_present = user_ids - old_present
+      new_absent = old_present - user_ids
 
       new_present.each do |m|
-        a = Attendance.where(event_id: @event.id, member_id: m).first
+        a = Attendance.where(event_id: @event.id, user_id: m).first
         a.update_attribute(:present, true)
       end
 
       new_absent.each do |m|
-        a = Attendance.where(event_id: @event.id, member_id: m).first
+        a = Attendance.where(event_id: @event.id, user_id: m).first
         a.update_attribute(:present, false)
       end
 
-      flash[:attention] = "#{@event.name} on #{format_date @event.date} updated
+      flash[:notice] = "#{@event.name} on #{format_date @event.date} updated
                           successfully."
       redirect_to(@event)
     else
+      flash[:alert] = "There was problem updating the event. Try again";
       render 'edit'
     end
   end

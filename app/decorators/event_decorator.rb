@@ -13,14 +13,14 @@ class EventDecorator < Draper::Decorator
   #     end
   #   end
 
-  def format_self_submit_attendance(member)
+  def format_self_submit_attendance(user)
     if object.self_submit_attendance
-      attendance = Attendance.where(member_id: member.id, event_id: object.id)
+      attendance = Attendance.where(user_id: user.id, event_id: object.id)
       if attendance.count > 0
         if attendance.first.present == true
           'You attended this event'
         else
-          h.render partial: 'attendances/self_report', locals: {attendance: attendance.first}
+          h.render partial: 'attendance/attendances/self_report', locals: {attendance: attendance.first}
         end
       end
     else

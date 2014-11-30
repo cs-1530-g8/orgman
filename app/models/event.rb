@@ -5,11 +5,11 @@ class Event < ActiveRecord::Base
   has_many :members, through: :attendances
   belongs_to :event_type
 
-  def attended_members
-    self.attendances.where(present: true).collect(&:member)
+  def attended_users
+    self.attendances.where(present: true).collect(&:user)
   end
 
-  def absent_members
-    self.attendances.where(present: false).collect(&:member)
+  def absent_users
+    self.attendances.where(present: false).collect(&:user)
   end
 end
