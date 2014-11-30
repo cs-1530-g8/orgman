@@ -39,5 +39,9 @@ Rails.application.routes.draw do
     post :deactivate, on: :member
   end
 
+  resources :events, controller: 'attendance/events'
+
+  resources :attendances, only: [:update], controller: 'attendance/attendances'
+
   root 'external#index'
 end

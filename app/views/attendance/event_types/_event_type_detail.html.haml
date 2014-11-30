@@ -16,6 +16,5 @@
       = f.label :percentage_attendance_required, 'Percentage attendance required:'
       = f.text_field :percentage_attendance_required, id: "event_type_#{event_type.id}_percentage_attendance_required", maxlength: '3', size: '3'
 
-  .btn-group
-    = f.submit "Save", class: 'btn btn-success btn-sm'
-    = event_type.delete_link
+  = f.submit "Save", class: 'btn btn-success btn-sm'
+  = event_type.delete_link
