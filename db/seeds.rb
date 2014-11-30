@@ -8,7 +8,14 @@
 
 admin = User.create! first_name: 'Alex', last_name: 'Vallejo',
                      email: 'email@example.com', password: 'password',
-                     password_confirmation: 'password', approved: true
+                     password_confirmation: 'password', approved: true,
+                     status: 'active', position: 'secretary'
 admin.confirm!
+
+standard_user = User.create! first_name: 'Drew', last_name: 'Land',
+                     email: 'drew@example.com', password: 'password',
+                     password_confirmation: 'password', approved: true,
+                     status: 'active'
+standard_user.confirm!
 
 EventType.create(name: 'Miscellaneous')
