@@ -1,7 +1,9 @@
 class EventType < ActiveRecord::Base
   before_save { self.name = name.titleize }
 
-  has_many :events
+  # Constants ##################################################################
+
+  # Validations ################################################################
 
   validates :name, presence: true, length: { maximum: 20 }
 
@@ -17,13 +19,7 @@ class EventType < ActiveRecord::Base
   validates :percentage_attendance_required, absence: true,
             if: Proc.new { |e| e.points_required.present? }
 
-  def required?
-    self.points_required > 0 || self.percentage_attendance_required > 0
-  end
-
-  def not_required?
-    self.points_required = 0 && self.percentage_attendance_required = 0
-  end
+  # Scopes #####################################################################
 
   scope :required, -> {
     where("points_required > 0 OR percentage_attendance_required > 0").
@@ -33,4 +29,18 @@ class EventType < ActiveRecord::Base
     where("points_required = 0 AND percentage_attendance_required = 0").
     order(:name)
   }
+
+  # Associations ###############################################################
+
+  has_many :events
+
+  # Helpers ####################################################################
+
+  def required?
+    self.points_required > 0 || self.percentage_attendance_required > 0
+  end
+
+  def not_required?
+    self.points_required = 0 && self.percentage_attendance_required = 0
+  end
 end
