@@ -5,11 +5,11 @@ class EventType < ActiveRecord::Base
 
   validates :name, presence: true, length: { maximum: 20 }
 
-  validates :points_required, length: { maximum: 2 },
-            numericality: { only_integer: true }, allow_nil: true
+  validates :points_required, numericality: { only_integer: true,
+            greater_than: 0 }, allow_nil: true
 
-  validates :percentage_attendance_required, length: { maximum: 3 },
-            numericality: { only_integer: true }, allow_nil: true
+  validates :percentage_attendance_required, numericality: { only_integer: true,
+            greater_than: 0, less_than_or_equal_to: 100 }, allow_nil: true
 
   validates :points_required, absence: true,
             if: Proc.new { |e| e.percentage_attendance_required.present? }
