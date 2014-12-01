@@ -1,5 +1,13 @@
 require 'spec_helper'
 
 describe Attendance do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before { @attendance = Attendance.new }
+
+  subject { @attendance }
+
+  it { should respond_to(:id) }
+  it { should respond_to(:user_id) }
+  it { should respond_to(:event_id) }
+  it { should respond_to(:present) }
+  it { should respond_to(:excused) }
 end
