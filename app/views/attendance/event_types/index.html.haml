@@ -1,0 +1,11 @@
+.bs-callout
+  .bs-callout-danger
+    %h4 Caution when deleting an event type
+    %p If you delete an event type all existing events of that type will be moved to the 'Miscellanous' type. There is no way to restore them unless you re-create the type and manually re-add all of the events back to the new type.
+    %p You may not delete the 'Miscellanous' event type.
+
+%h2 All event types
+=render partial: 'attendance/event_types/event_type_detail', collection: @event_types, as: :event_type
+
+%h2 Add a new event type
+= render partial: 'attendance/event_types/event_type_detail', locals: { event_type: @new_event_type }

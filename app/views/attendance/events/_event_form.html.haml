@@ -1,0 +1,53 @@
+.form-horizontal
+  = form_for @event do |f|
+    = render 'shared/error_messages', object: f.object
+
+    .form-group
+      .col-sm-4
+        = f.label :name, 'Event Name:', class: 'control-label'
+      .col-sm-8
+        = f.text_field :name, size: '50', maxlength: '50'
+
+    .form-group
+      .col-sm-4
+        = f.label :date, 'Date:'
+      .col-sm-8
+        = f.date_select :date
+
+    .form-group
+      .col-sm-4
+        = f.label :fine, 'Fine:'
+      .col-sm-8
+        = f.text_field :fine, size: '3', maxlength: '3'
+
+    .form-group
+      .col-sm-4
+        = f.label :event_type_id, 'Event Type:'
+        - valid_event_types = @event.valid_event_types(current_user)
+      .col-sm-8
+        = collection_select :event, :event_type_id, valid_event_types, :id, :name
+
+    .form-group
+      .col-sm-4
+        = f.label :attendances, 'Attended Members:'
+      .col-sm-8
+        = f.fields_for :attendances do |at|
+          = at.collection_select :user_ids, User.active, :id, :name,
+            { selected: @event.attended_users.map { |user| user.id} },
+            { multiple: true, class: 'select2'}
+
+    .form-group
+      .col-sm-4
+        = f.label :self_submit_attendance, 'Self-submited attendances permitted?'
+      .col-sm-8
+        = f.check_box :self_submit_attendance
+
+    .form-group
+      .col-sm-4
+        = f.label :self_submit_excuse, 'Self-submited excuses permitted? '
+      .col-sm-8
+        = f.check_box :self_submit_excuse
+
+    .form-group
+      .col-sm-12
+        = f.submit "Save", class: ' btn btn-primary'

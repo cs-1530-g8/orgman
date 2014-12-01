@@ -1,0 +1,9 @@
+%h2 Attendance Leaderboard
+
+%table.table.table-striped
+  %th Member
+  %th Total
+  - EventType.required.each do |type|
+    %th #{type.name}
+    %th Other
+  = render partial: 'attendance/leaderboard/user_point_detail', collection: @users, as: :user

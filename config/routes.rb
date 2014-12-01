@@ -31,9 +31,19 @@ Rails.application.routes.draw do
 
   get 'index' => 'external#index', as: :external_index
 
+  get 'leaderboard' => 'attendance/leaderboard#index', as: :leaderboard
+
+  resources :event_types, controller: 'attendance/event_types' do
+    get :delete, on: :member
+  end
+
   resources :links, except: [:show, :destroy, :edit, :update, :new] do
     post :deactivate, on: :member
   end
+
+  resources :events, controller: 'attendance/events'
+
+  resources :attendances, only: [:update], controller: 'attendance/attendances'
 
   root 'external#index'
 end

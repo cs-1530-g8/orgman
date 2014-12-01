@@ -8,6 +8,9 @@
     %meta{:content => 'width=device-width, initial-scale=1', :name => 'viewport'}/
   %body
     = render partial: 'layouts/navbar'
-    = bootstrap_flash
+    .container
+      .row
+        .col-md-12
+          = bootstrap_flash
     .container
       = yield
