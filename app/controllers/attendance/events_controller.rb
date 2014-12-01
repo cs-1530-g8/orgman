@@ -20,10 +20,12 @@ class Attendance::EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id]).decorate
-    @attended_users = @event.attended_users.sort_by { |u| [u.last_name,
-                                                           u.first_name] }
-    @absent_users = @event.absent_users.sort_by { |u| [u.last_name,
-                                                       u.first_name] }
+    @attended_users = @event.attended_users.sort_by {
+      |u| [u.last_name, u.first_name]
+    }
+    @absent_users = @event.absent_users.sort_by {
+      |u| [u.last_name, u.first_name]
+    }
   end
 
   def new
@@ -39,7 +41,7 @@ class Attendance::EventsController < ApplicationController
     @event.semester = current_semester(Time.now.year)
 
     if @event.save
-      user_ids = params[:event][:attendances][:user_ids].reject{ |s| s.blank? }
+      user_ids = params[:event][:attendances][:user_ids].reject { |s| s.blank? }
       absent = User.active - User.find(user_ids)
 
       user_ids.each do |user_id|

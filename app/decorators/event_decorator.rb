@@ -20,7 +20,7 @@ class EventDecorator < Draper::Decorator
           'You attended this event'
         else
           h.render partial: 'attendance/attendances/self_report',
-            locals: { attendance: attendance.first }
+                   locals: { attendance: attendance.first }
         end
       end
     else
