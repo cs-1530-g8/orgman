@@ -1,5 +1,6 @@
 require 'spec_helper'
 
 describe User do
-  pending "add some examples to (or delete) #{__FILE__}"
+  pending "This test is failing because the feature is not built yet."
+  pending "TDD is in use for this feature"
 end
