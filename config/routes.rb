@@ -33,6 +33,8 @@ Rails.application.routes.draw do
 
   get 'leaderboard' => 'attendance/leaderboard#index', as: :leaderboard
 
+  get 'dashboard' => 'dashboard', as: :dashboard
+
   resources :event_types, controller: 'attendance/event_types' do
     get :delete, on: :member
   end
