@@ -1,0 +1,4 @@
+= form_tag update_status_path do
+  = hidden_field_tag 'status', status
+  = select_tag :users_to_update, options_from_collection_for_select(users, "id", "name"), multiple: true
+  = submit_tag 'Update'
