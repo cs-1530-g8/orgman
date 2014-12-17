@@ -1,4 +1,9 @@
-= form_tag update_status_path do
-  = hidden_field_tag 'status', status
-  = select_tag :users_to_update, options_from_collection_for_select(users, "id", "name"), multiple: true
-  = submit_tag 'Update'
+= form_tag update_status_path, class: 'form-horizontal' do
+  .form-group
+    .col-sm-1
+      =label :users_to_update, title
+    .col-sm-1
+      = hidden_field_tag 'status', status
+      = select_tag :users_to_update, options_from_collection_for_select(users, "id", "name"), multiple: true
+    .col-sm-1
+      = submit_tag 'Update', class: 'btn btn-success form-control'

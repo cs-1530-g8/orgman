@@ -1,9 +1,4 @@
 %h1 Update User Status
-%h4 To Inactive
-= render partial: 'update_users/status_update', locals: { status: 'inactive', users: User.active + User.alumni }
-
-%h4 To Alumni
-= render partial: 'update_users/status_update', locals: { status: 'alumni', users: User.active + User.inactive }
-
-%h4 To Active
-= render partial: 'update_users/status_update', locals: { status: 'active', users: User.alumni + User.inactive }
+= render partial: 'update_users/status_update', locals: { title: 'To Inactive', status: 'inactive', users: User.active + User.alumni }
+= render partial: 'update_users/status_update', locals: { title: 'To Alumni', status: 'alumni', users: User.active + User.inactive }
+= render partial: 'update_users/status_update', locals: { title: 'To Active', status: 'active', users: User.alumni + User.inactive }
