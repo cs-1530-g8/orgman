@@ -2,7 +2,8 @@ Rails.application.routes.draw do
 
   # Add devise routes for users
   # devise_for :users
-  devise_for :users, skip: [:sessions, :registrations, :password, :confirmation, :unlock]
+  devise_for :users, skip: [:sessions, :registrations, :password, :confirmation,
+                            :unlock]
 
   # Rename devise routes to look nicer
   devise_scope :user do
@@ -34,6 +35,9 @@ Rails.application.routes.draw do
   get 'leaderboard' => 'attendance/leaderboard#index', as: :leaderboard
 
   get 'dashboard' => 'dashboard', as: :dashboard
+
+  get  'update_users'  => 'update_users#index',         as: :update_users
+  post 'update_status' => 'update_users#update_status', as: :update_status
 
   resources :event_types, controller: 'attendance/event_types' do
     get :delete, on: :member
