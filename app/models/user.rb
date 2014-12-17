@@ -14,7 +14,10 @@ class User < ActiveRecord::Base
 
   # Scopes #####################################################################
 
-  scope :active, -> { where("status = 'active'") }
+  scope :active,   -> { where("status = 'active'") }
+  scope :alumni,   -> { where("status = 'alumni'") }
+  scope :pending,  -> { where("status = 'pending'") }
+  scope :inactive, -> { where("status = 'inactive'") }
 
   # Associations ###############################################################
 
