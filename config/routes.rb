@@ -36,8 +36,9 @@ Rails.application.routes.draw do
 
   get 'dashboard' => 'dashboard', as: :dashboard
 
-  get  'update_users'  => 'update_users#index',         as: :update_users
-  post 'update_status' => 'update_users#update_status', as: :update_status
+  get  'update_users'     => 'update_users#index',            as: :update_users
+  post 'update_status'    => 'update_users#update_status',    as: :update_status
+  post 'update_positions' => 'update_users#update_positions', as: :update_positions
 
   resources :event_types, controller: 'attendance/event_types' do
     get :delete, on: :member
