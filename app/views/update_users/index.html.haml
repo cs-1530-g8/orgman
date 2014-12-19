@@ -1,0 +1,21 @@
+%h1 Update User Status
+= render partial: 'update_users/status_update', locals: { title: 'To Inactive', status: 'inactive', users: User.active + User.alumni }
+= render partial: 'update_users/status_update', locals: { title: 'To Alumni', status: 'alumni', users: User.active + User.inactive }
+= render partial: 'update_users/status_update', locals: { title: 'To Active', status: 'active', users: User.alumni + User.inactive }
+
+%h1 Update User Positions
+= form_tag update_positions_path, class: 'form-horizontal' do
+  = render partial: 'update_users/position_update', locals: { value: :president, title: 'President', id: user_id_for_position(User.president) }
+  = render partial: 'update_users/position_update', locals: { value: :vice_president, title: 'Vice President', id: user_id_for_position(User.vice_president) }
+  = render partial: 'update_users/position_update', locals: { value: :secretary, title: 'Secretary', id: user_id_for_position(User.secretary) }
+  = render partial: 'update_users/position_update', locals: { value: :treasurer, title: 'Treasurer', id: user_id_for_position(User.treasurer) }
+  = render partial: 'update_users/position_update', locals: { value: :alumni_relations, title: 'Alumni Relations', id: user_id_for_position(User.alumni_relations) }
+  = render partial: 'update_users/position_update', locals: { value: :risk_manager, title: 'Risk Manager', id: user_id_for_position(User.risk_manager) }
+  = render partial: 'update_users/position_update', locals: { value: :recruitment, title: 'Recruitment', id: user_id_for_position(User.recruitment) }
+  = render partial: 'update_users/position_update', locals: { value: :social, title: 'Social', id: user_id_for_position(User.social) }
+  = render partial: 'update_users/position_update', locals: { value: :amc, title: 'AMC', id: user_id_for_position(User.amc) }
+  = render partial: 'update_users/position_update', locals: { value: :jamc, title: 'JAMC', id: user_id_for_position(User.jamc) }
+  = render partial: 'update_users/position_update', locals: { value: :house_manager, title: 'House Manager', id: user_id_for_position(User.house_manager) }
+
+  .form-group.col-sm-2
+    = submit_tag 'Update Positions', class: 'btn btn-success form-control'
