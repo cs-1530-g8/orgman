@@ -34,6 +34,9 @@ class Attendance::EventTypesController < ApplicationController
 
   def delete
     @event_type = EventType.find(params[:id])
+    @events = @event_type.events
+    @events.update_all(event_type_id: 1)
+
     if @event_type.destroy!
       flash[:notice] = "\"#{@event_type.name}\" was deleted."
       redirect_to(event_types_path)
