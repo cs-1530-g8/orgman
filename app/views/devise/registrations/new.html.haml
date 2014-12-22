@@ -1,19 +1,36 @@
-= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+= form_for(resource, as: resource_name, url: registration_path(resource_name), id: 'active-sign-up') do |f|
   = devise_error_messages!
 
-  %h2.form-signin-heading Sign Up
-
-  .form-group
-    = f.text_field :first_name, autofocus: true, class: 'form-control', placeholder: 'First Name'
-  .form-group
-    = f.text_field :last_name, autofocus: true, class: 'form-control', placeholder: 'Last Name'
-  .form-group
-    = f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'Email Address'
-  .form-group
-    = f.password_field :password, autocomplete: 'off', class: 'form-control', placeholder: 'Password'
-  .form-group
-    = f.password_field :password_confirmation, autocomplete: 'off', class: 'form-control', placeholder: 'Retype Password'
-
-  = f.submit 'Sign up', class: 'btn btn-lg btn-primary btn-block'
-
-= render 'devise/shared/links'
+  .col-sm-4
+    %h2 Sign Up
+    .form-group
+      = f.label :first_name
+      = f.text_field :first_name, autofocus: true, class: 'form-control', placeholder: 'Myron Mckee'
+    .form-group
+      = f.label :last_name
+      = f.text_field :last_name, autofocus: true, class: 'form-control', placeholder: 'Crandall'
+    .form-group
+      = f.label :email
+      = f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'email@example.com'
+    .form-group
+      = f.label :password
+      = f.password_field :password, autocomplete: 'off', class: 'form-control', placeholder: 'Password'
+    .form-group
+      = f.label :password_confirmation
+      = f.password_field :password_confirmation, autocomplete: 'off', class: 'form-control', placeholder: 'Retype Password'
+    %h4 For undergrads only:
+    .form-group
+      = f.label :two_p_number, '2P Number'
+      = f.text_field :two_p_number, autofocus: true, class: 'form-control', placeholder: '2P000634328011Z'
+    .form-group
+      = f.label :peoplesoft_number
+      = f.number_field :peoplesoft_number, autofocus: true, class: 'form-control', placeholder: '3578411'
+    .form-group
+      = f.label :phone_number
+      = f.phone_field :phone_number, autofocus: true, class: 'form-control', placeholder: '412-555-5555'
+    .form-group
+      = f.label :address
+      = f.text_field :address, autofocus: true, class: 'form-control', placeholder: '716 Carriage Dr. Wexford PA 15090'
+    .form-group
+      = f.submit 'Sign up', class: 'btn btn-lg btn-primary btn-block'
+    = render 'devise/shared/links'
