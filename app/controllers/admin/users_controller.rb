@@ -8,9 +8,10 @@ class Admin::UsersController < ApplicationController
 
   def approve_user
     id = params[:id]
+    status = params[:status]
     user = User.find(id)
     if params[:approve] == 'true'
-      user.update_attribute(:approved, true)
+      user.update(approved: true, status: status)
     end
     redirect_to(pending_approvals_path)
   end

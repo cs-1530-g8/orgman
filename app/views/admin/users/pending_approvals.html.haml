@@ -1,13 +1,17 @@
 %h1 Users Awaiting Approval
+.bs-callout
+  .bs-callout-danger
+    %h4 Caution when approving a user
+    %p Carefully verify each user's data before approving them. It is your job to make sure their data is accurate and complete.
+    %p If you approve someone as the wrong status just change it on the #{link_to "\"Update Status\"", update_status_path} page
 
-%table
-  %thead
-    %th Email
-    %th Name
-    %th Approve
-
-  - @users.each do |user|
-    %tr
-      %td= user.email
-      %td= user.name
-      %td= link_to "yes", approve_user_path(id: user.id, approve: true)
+- @users.each do |u|
+  %h4= u.name
+  %p= 'Email: ' + u.email
+  %p= 'Peoplesoft Number: ' + (u.peoplesoft_number.blank? ? '(none provided)' : u.peoplesoft_number)
+  %p= '2P Number: ' + (u.two_p_number.blank? ? '(none provided)' : u.two_p_number)
+  %p= 'Address: ' + (u.address.blank? ? '(none provided)' : u.address)
+  %p= 'Phone Number: ' + (u.phone_number.blank? ? '(none provided)' : u.phone_number.to_s)
+  %p= 'About: ' + (u.about.blank? ? '(none provided)' : u.about)
+  %p= link_to 'Approve as active', approve_user_path(id: u.id, approve: true, status: :active), class: 'btn btn-success'
+  =link_to 'Approve as alumni', approve_user_path(id: u.id, approve: true, status: :alumni), class: 'btn btn-success'
