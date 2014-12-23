@@ -13,5 +13,8 @@
   %p= 'Address: ' + (u.address.blank? ? '(none provided)' : u.address)
   %p= 'Phone Number: ' + (u.phone_number.blank? ? '(none provided)' : u.phone_number.to_s)
   %p= 'About: ' + (u.about.blank? ? '(none provided)' : u.about)
-  %p= link_to 'Approve as active', approve_user_path(id: u.id, approve: true, status: :active), class: 'btn btn-success'
-  =link_to 'Approve as alumni', approve_user_path(id: u.id, approve: true, status: :alumni), class: 'btn btn-success'
+  %p= 'Profile Picture: '
+  %p= image_tag u.avatar.url(:thumb), class: 'img-thumbnail'
+  %p= button_to 'Approve as Active', approve_user_path(id: u.id, approve: true, status: :active), class: 'btn btn-success'
+  %p= button_to 'Approve as Alumni', approve_user_path(id: u.id, approve: true, status: :alumni), class: 'btn btn-success'
+  %p= button_to 'Reject User', reject_user_path(id: u.id), class: 'btn btn-danger'

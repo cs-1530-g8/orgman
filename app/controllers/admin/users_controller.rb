@@ -15,4 +15,14 @@ class Admin::UsersController < ApplicationController
     end
     redirect_to(pending_approvals_path)
   end
+
+  def reject_user
+    user = User.find(params[:id])
+    if user.destroy
+      flash[:notice] = "#{user.name}'s application was rejected."
+    else
+      flash[:alert] = "#{user.name}'s application was not rejected. Try again."
+    end
+    redirect_to(pending_approvals_path)
+  end
 end

@@ -28,7 +28,8 @@ Rails.application.routes.draw do
   end
 
   get 'pending_approvals' => 'admin/users#pending_approvals', as: :pending_approvals
-  get 'approve_user'      => 'admin/users#approve_user',      as: :approve_user
+  post 'approve_user'     => 'admin/users#approve_user',      as: :approve_user
+  post 'reject_user'      => 'admin/users#reject_user',       as: :reject_user
 
   get 'index' => 'external#index', as: :external_index
 
