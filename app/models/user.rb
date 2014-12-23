@@ -50,7 +50,12 @@ class User < ActiveRecord::Base
   validates :first_name, presence: true, length: { maximum: 50 }
   validates :last_name,  presence: true, length: { maximum: 50 }
   validates :two_p_number,               length: { is: 15 }, allow_blank: true
-  validates :peoplesoft_number,          length: { is: 7 },  allow_blank: true
+  validates :address, allow_blank: true, length: { maximum: 100 }
+  validates :phone_number,               length: { is: 10 }, allow_blank: true
+  validates :about, allow_blank: true,   length: { maximum: 150 }
+  validates :peoplesoft_number, numericality: { only_integer: true,
+            greater_than: 1000000, less_than: 10000000 },
+            length: { is: 7 }, allow_blank: true
 
   has_attached_file :avatar,
                     styles: { medium: '300x300>', thumb: '100x100>' },
