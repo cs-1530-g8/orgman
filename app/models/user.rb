@@ -57,9 +57,11 @@ class User < ActiveRecord::Base
             greater_than: 1000000, less_than: 10000000 },
             length: { is: 7 }, allow_blank: true
 
-  has_attached_file :avatar,
-                    styles: { medium: '300x300>', thumb: '100x100>' },
+  has_attached_file :avatar, styles: { medium: '300x300>', thumb: '100x100>' },
                     default_url: '/images/:style/missing.png'
+  validates_attachment :avatar, size: { in: 0..2.megabytes },
+                       content_type: { content_type: ["image/jpg","image/jpeg",
+                                                      "image/png","image/gif"] }
 
   # Scopes #####################################################################
 

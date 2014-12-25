@@ -16,3 +16,6 @@
 /tmp
 
 /config/database.yml
+
+# Ignore files uploade via paperclip
+/public/*

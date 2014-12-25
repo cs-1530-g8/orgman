@@ -3,7 +3,7 @@
   .bs-callout-danger
     %h4 Caution when approving a user
     %p Carefully verify each user's data before approving them. It is your job to make sure their data is accurate and complete.
-    %p If you approve someone as the wrong status just change it on the #{link_to "\"Update Status\"", update_status_path} page
+    %p If you approve someone as the wrong status just change it on the #{link_to "\"Update Users\"", update_users_path} page
 
 - @users.each do |u|
   %h4= u.name
@@ -13,5 +13,14 @@
   %p= 'Address: ' + (u.address.blank? ? '(none provided)' : u.address)
   %p= 'Phone Number: ' + (u.phone_number.blank? ? '(none provided)' : u.phone_number.to_s)
   %p= 'About: ' + (u.about.blank? ? '(none provided)' : u.about)
-  %p= link_to 'Approve as active', approve_user_path(id: u.id, approve: true, status: :active), class: 'btn btn-success'
-  =link_to 'Approve as alumni', approve_user_path(id: u.id, approve: true, status: :alumni), class: 'btn btn-success'
+  %p= 'Profile Picture: '
+  %p= image_tag u.avatar.url(:thumb), class: 'img-thumbnail'
+  %p= button_to 'Approve as Active', approve_user_path(id: u.id, approve: true, status: :active), class: 'btn btn-success'
+  %p= button_to 'Approve as Alumni', approve_user_path(id: u.id, approve: true, status: :alumni), class: 'btn btn-success'
+  = form_tag reject_user_path do
+    = hidden_field_tag :id, u.id
+    .form-group
+      = label_tag :rejection_message, 'Rejection Message:'
+      = text_area :rejection_message, :message, class: 'form-control', placeholder: 'Tell the user why you are rejecting their request to join (150 characters or less).'
+    .form-group
+      = submit_tag 'Reject User', class: 'btn btn-danger'
