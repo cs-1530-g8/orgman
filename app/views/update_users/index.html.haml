@@ -4,6 +4,10 @@
 = render partial: 'update_users/status_update', locals: { title: 'To Active', status: 'active', users: User.alumni + User.inactive }
 
 %h1 Update User Positions
+.bs-callout
+  .bs-callout-danger
+    %h4 Users may only hold one position
+    %p Users may only hold one position at a time. If you need this functionality please contact the administrator.
 = form_tag update_positions_path, class: 'form-horizontal' do
   = render partial: 'update_users/position_update', locals: { value: :president, title: 'President', id: user_id_for_position(User.president) }
   = render partial: 'update_users/position_update', locals: { value: :vice_president, title: 'Vice President', id: user_id_for_position(User.vice_president) }

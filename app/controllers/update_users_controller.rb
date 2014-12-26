@@ -22,62 +22,35 @@ class UpdateUsersController < ApplicationController
   end
 
   def update_positions
-    unless params[:president].blank?
-      user = User.find(params[:president])
-      user.update(position: User.president)
-    end
-
-    unless params[:vice_president].blank?
-      user = User.find(params[:vice_president])
-      user.update(position: User.vice_president)
-    end
-
-    unless params[:secretary].blank?
-      user = User.find(params[:secretary])
-      user.update(position: User.secretary)
-    end
-
-    unless params[:treasurer].blank?
-      user = User.find(params[:treasurer])
-      user.update(position: User.treasurer)
-    end
-
-    unless params[:alumni_relations].blank?
-      user = User.find(params[:alumni_relations])
-      user.update(position: User.alumni_relations)
-    end
-
-    unless params[:risk_manager].blank?
-      user = User.find(params[:risk_manager])
-      user.update(position: User.risk_manager)
-    end
-
-    unless params[:recruitment].blank?
-      user = User.find(params[:recruitment])
-      user.update(position: User.recruitment)
-    end
-
-    unless params[:social].blank?
-      user = User.find(params[:social])
-      user.update(position: User.social)
-    end
-
-    unless params[:amc].blank?
-      user = User.find(params[:amc])
-      user.update(position: User.amc)
-    end
-
-    unless params[:jamc].blank?
-      user = User.find(params[:jamc])
-      user.update(position: User.jamc)
-    end
-
-    unless params[:house_manager].blank?
-      user = User.find(params[:house_manager])
-      user.update(position: User.house_manager)
-    end
+    update_position_for_user_id(params[:president], User.president)
+    update_position_for_user_id(params[:vice_president], User.vice_president)
+    update_position_for_user_id(params[:secretary], User.secretary)
+    update_position_for_user_id(params[:treasurer], User.treasurer)
+    update_position_for_user_id(params[:alumni_relations], User.alumni_relations)
+    update_position_for_user_id(params[:risk_manager], User.risk_manager)
+    update_position_for_user_id(params[:recruitment], User.recruitment)
+    update_position_for_user_id(params[:social], User.social)
+    update_position_for_user_id(params[:amc], User.amc)
+    update_position_for_user_id(params[:jamc], User.jamc)
+    update_position_for_user_id(params[:house_manager], User.house_manager)
 
     flash[:notice] = 'Positions updated successfully'
     redirect_to update_users_path
+  end
+
+  private
+
+  def update_position_for_user_id(user_id, position)
+    # Clear the old position holder
+    old_user_with_position = User.find_by(position: position)
+    if old_user_with_position
+      old_user_with_position.update(position: nil)
+    end
+
+    # Set the new position holder
+    if !user_id.blank?
+      user = User.find(user_id)
+      user.update(position: position)
+    end
   end
 end
