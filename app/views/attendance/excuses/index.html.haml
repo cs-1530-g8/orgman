@@ -1,0 +1,7 @@
+%h1 My excuses
+%table.table.table-striped
+  %th Event Name
+  %th Event Date
+  %th Description
+  %th Status
+  =render partial: 'attendance/excuses/excuse', collection: @excuses, as: :excuse

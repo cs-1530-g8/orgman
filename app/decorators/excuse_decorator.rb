@@ -10,4 +10,13 @@ class ExcuseDecorator < Draper::Decorator
   #     end
   #   end
 
+  def format_accepted
+    if object.accepted.blank?
+      'pending'
+    elsif object.accepted
+      'accepted'
+    else
+      'rejected'
+    end
+  end
 end
