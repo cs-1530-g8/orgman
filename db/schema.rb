@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141223020058) do
+ActiveRecord::Schema.define(version: 20141227053713) do
 
   create_table "attendances", force: true do |t|
     t.integer  "user_id"
@@ -38,6 +38,15 @@ ActiveRecord::Schema.define(version: 20141223020058) do
     t.boolean  "self_submit_excuse"
     t.integer  "semester"
     t.integer  "event_type_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "excuses", force: true do |t|
+    t.integer  "event_id"
+    t.integer  "user_id"
+    t.string   "reason"
+    t.boolean  "accepted"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
