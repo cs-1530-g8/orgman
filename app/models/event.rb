@@ -11,6 +11,7 @@ class Event < ActiveRecord::Base
 
   has_many :attendances
   has_many :members, through: :attendances
+  has_many :excuses
   belongs_to :event_type
 
   # Helpers ####################################################################

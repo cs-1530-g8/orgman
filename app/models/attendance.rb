@@ -7,6 +7,7 @@ class Attendance < ActiveRecord::Base
 
   # Associations ###############################################################
 
+  has_one :excuse
   belongs_to :event
   belongs_to :user
 
