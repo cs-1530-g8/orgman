@@ -1,26 +1,22 @@
-class Event < ActiveRecord::Base
-  before_save { self.name = name.titleize }
-
+class Excuse < ActiveRecord::Base
   # Constants ##################################################################
 
   # Validations ################################################################
 
+  validates :reason,         presence: true, length: { maximum: 150 }
+  validates :user_id,        presence: true
+  validates :event_id,       presence: true
+  validates :attendance_id,  presence: true
+
   # Scopes #####################################################################
+
+  scope :pending, -> { where(accepted: nil) }
 
   # Associations ###############################################################
 
-  has_many :attendances
-  has_many :members, through: :attendances
-  has_many :excuses
-  belongs_to :event_type
+  belongs_to :user
+  belongs_to :event
+  has_one :attendance
 
   # Helpers ####################################################################
-
-  def attended_users
-    self.attendances.where(present: true).collect(&:user)
-  end
-
-  def absent_users
-    self.attendances.where(present: false).collect(&:user)
-  end
 end

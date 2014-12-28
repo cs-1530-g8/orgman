@@ -49,6 +49,11 @@ Rails.application.routes.draw do
     post :deactivate, on: :member
   end
 
+  get  'pending_excuses' => 'attendance/excuses#pending_excuses', as: :pending_excuses
+  post 'process_excuse'  => 'attendance/excuses#process_excuse',  as: :process_excuse
+  resources :excuses, controller: 'attendance/excuses', only: [ :index, :create,
+                                                                :destroy ]
+
   resources :events, controller: 'attendance/events'
 
   resources :attendances, only: [:update], controller: 'attendance/attendances'

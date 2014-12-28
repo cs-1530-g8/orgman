@@ -1,6 +1,5 @@
 class Attendance::EventsController < ApplicationController
   include EventsHelper
-  include ApplicationHelper
 
   before_action :authenticate_user!
   before_action -> { member_can_edit_event(current_user, params[:id]) },

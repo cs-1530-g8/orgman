@@ -1,0 +1,8 @@
+%h2 Pending Excuses
+%table.table.table-striped
+  %th User's Name
+  %th Event Name
+  %th Event Date
+  %th Reason Requesting Excuse
+  %th{colspan: 2} Decision
+  =render partial: 'attendance/excuses/pending_excuse', collection: @excuses, as: :excuse
