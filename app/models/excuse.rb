@@ -3,6 +3,10 @@ class Excuse < ActiveRecord::Base
 
   # Validations ################################################################
 
+  validates :event_id, presence: true
+  validates :user_id,  presence: true
+  validates :reason,   presence: true
+
   # Scopes #####################################################################
 
   # Associations ###############################################################
