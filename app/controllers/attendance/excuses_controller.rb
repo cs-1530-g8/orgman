@@ -2,6 +2,7 @@ class Attendance::ExcusesController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    @excuse = Excuse.new
     @excuses = current_user.excuses.decorate
   end
 

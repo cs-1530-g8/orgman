@@ -47,4 +47,8 @@ class EventDecorator < Draper::Decorator
       h.link_to event.name, h.event_path(object)
     end
   end
+
+  def name_and_date
+    object.name + ' (' + h.format_date(object.date) + ')'
+  end
 end

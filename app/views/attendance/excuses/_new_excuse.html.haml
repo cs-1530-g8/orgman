@@ -1,0 +1,12 @@
+.col-md-8
+  =form_for(@excuse, html: { class: 'form-horizontal' }) do |f|
+    .form-group
+      = f.label :excuse, 'Event:', class: 'col-md-2'
+      = f.collection_select :event_id, EventDecorator.decorate_collection(excusable_events()), :id, :name_and_date, class: 'form-control'
+
+    .form-group
+      = f.label :reason, 'Reason for requesting excuse:', class: 'col-md-2'
+      = f.text_area :reason, class: 'form-control col-md-4', width: '30%', placeholder: 'Limit to 150 characters.'
+
+    .form-group
+      = f.submit 'Submit Excuse', class: 'btn btn-success'
