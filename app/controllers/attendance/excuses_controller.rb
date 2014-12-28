@@ -48,7 +48,8 @@ class Attendance::ExcusesController < ApplicationController
       excuse.update(accepted: accepted)
       flash[:notice] = "#{name}'s excuse for #{event} on #{date} was #{result}"
     else
-      flash[:alert] = "There was a problem! Please manually add an excuse for the user."
+      flash[:alert] = "There was a problem! Please manually add an excuse for
+                       the user."
     end
 
     redirect_to pending_excuses_path
