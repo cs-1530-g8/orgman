@@ -1,0 +1,7 @@
+%tr
+  %td= excuse.user.name
+  %td= excuse.event.name
+  %td= format_date(excuse.event.date)
+  %td= excuse.reason
+  %td=button_to 'Accept', process_excuse_path(excuse_id: excuse.id, accepted: 'true'), class: 'btn btn-success btn-sm btn-block'
+  %td=button_to 'Reject', process_excuse_path(excuse_id: excuse.id, accepted: 'false'), class: 'btn btn-danger btn-sm btn-block'
