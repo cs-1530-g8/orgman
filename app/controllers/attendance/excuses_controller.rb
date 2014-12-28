@@ -13,12 +13,16 @@ class Attendance::ExcusesController < ApplicationController
                                     user_id: excuse.user_id)
     if attendance
       excuse.attendance_id = attendance.id
-      flash[:notice] = "You have successfully submited an excuse for #{excuse.event.name} on #{format_date(excuse.event.date)}"
+      excuse.save
+      attendance.update(excuse_id: excuse.id)
+
+      flash[:notice] = "You have successfully submited an excuse for
+                      #{excuse.event.name} on #{format_date(excuse.event.date)}"
     else
-      flash[:notice] = 'An error occured. Please contact your administrator to submit your excuse manually'
+      flash[:notice] = 'An error occured. Please ask your administrator to
+                        submit your excuse manually'
     end
 
-    excuse.save
     redirect_to excuses_path
   end
 
@@ -26,9 +30,28 @@ class Attendance::ExcusesController < ApplicationController
   end
 
   def pending_excuses
+    @excuses = Excuse.pending
   end
 
   def process_excuse
+    accepted = params[:accepted] == 'true' ? true : false
+    excuse = Excuse.find(params[:excuse_id])
+    attendance = excuse.attendance
+
+    if attendance && excuse
+      name = excuse.user.name
+      event = excuse.event
+      date = format_date(excuse.event.date)
+      result = accepted ? 'accepted' : 'rejected'
+
+      attendance.update(excused: true)
+      excuse.update(accepted: accepted)
+      flash[:notice] = "#{name}'s excuse for #{event} on #{date} was #{result}"
+    else
+      flash[:alert] = "There was a problem! Please manually add an excuse for the user."
+    end
+
+    redirect_to pending_excuses_path
   end
 
   private

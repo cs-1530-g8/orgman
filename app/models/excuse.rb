@@ -9,6 +9,8 @@ class Excuse < ActiveRecord::Base
 
   # Scopes #####################################################################
 
+  scope :pending, -> { where(accepted: nil) }
+
   # Associations ###############################################################
 
   belongs_to :user
