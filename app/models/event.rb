@@ -11,6 +11,7 @@ class Event < ActiveRecord::Base
 
   has_many :attendances
   has_many :users, through: :attendances
+  has_many :fines, through: :attendances
   has_many :excuses
   belongs_to :event_type
 
