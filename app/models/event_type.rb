@@ -37,10 +37,9 @@ class EventType < ActiveRecord::Base
   # Helpers ####################################################################
 
   def required?
-    self.points_required > 0 || self.percentage_attendance_required > 0
-  end
-
-  def not_required?
-    self.points_required = 0 && self.percentage_attendance_required = 0
+    points = self.points_required.present? && self.points_required > 0
+    percentage = self.percentage_attendance_required.present? &&
+                 self.percentage_attendance_required > 0
+    points || percentage
   end
 end
