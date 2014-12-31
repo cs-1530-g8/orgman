@@ -13,6 +13,6 @@ class RegistrationsController < Devise::RegistrationsController
     params.require(:user).permit(:first_name, :last_name, :email, :password,
                                  :password_confirmation, :peoplesoft_number,
                                  :two_p_number, :address, :phone_number, :about,
-                                 :avatar)
+                                 :avatar, :current_password)
   end
 end

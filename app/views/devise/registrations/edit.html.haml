@@ -1,25 +1,55 @@
 = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
-  %h2.form-signin-heading Edit = resource_name.to_s.humanize
   = devise_error_messages!
 
-  .form-group
-    = f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'Email Address'
+  .col-sm-4
+    %h2.form-signin-heading Edit your profile
 
-  -if devise_mapping.confirmable? && resource.pending_reconfirmation?
-    %div Currently waiting confirmation for: = resource.unconfirmed_email
+    .form-group
+      = f.label :email
+      = f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'Email Address'
 
-  .form-group
-    = f.password_field :password, autocomplete: 'off', class: 'form-control', placeholder: 'Leave blank if you dont want to change it'
-  .form-group
-    = f.password_field :password_confirmation, autocomplete: 'off', class: 'form-control', placeholder: 'Leave blank if you dont want to change it'
-  .form-group
-    = f.password_field :current_password, autocomplete: 'off', class: 'form-control', placeholder: 'Needed to confirm changes'
+    -if devise_mapping.confirmable? && resource.pending_reconfirmation?
+      %div Currently waiting confirmation for: #{ resource.unconfirmed_email }
 
-  = f.submit 'Update', class: 'btn btn-lg btn-primary btn-block'
+    .form-group
+      = f.label :password, 'New password'
+      = f.password_field :password, autocomplete: 'off', class: 'form-control', placeholder: 'Leave blank if you dont want to change it'
 
-%h3 Cancel my account
+    .form-group
+      = f.label :password_confirmation, 'Confirm new password'
+      = f.password_field :password_confirmation, autocomplete: 'off', class: 'form-control', placeholder: 'Leave blank if you dont want to change it'
 
-%p Unhappy? 
-  = button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete
+    .form-group
+      = f.label :first_name
+      = f.text_field :first_name, class: 'form-control', placeholder: resource.first_name
 
-= link_to "Back", :back 
+    .form-group
+      = f.label :last_name
+      = f.text_field :last_name, class: 'form-control', placeholder: resource.last_name
+
+    .form-group
+      = f.label :phone_number, 'Phone number (no digit seperators)'
+      = f.phone_field :phone_number, class: 'form-control', placeholder: resource.phone_number
+
+    .form-group
+      = f.label :address
+      = f.text_field :address, class: 'form-control', placeholder: resource.address
+
+    %hr
+    %h4 Undergrads Only:
+    .form-group
+      %p To change your profile picture talk to your admin.
+
+    .form-group
+      = f.label :two_p_number, '2P Number'
+      = f.text_field :two_p_number, class: 'form-control', placeholder: resource.two_p_number
+
+    .form-group
+      = f.label :peoplesoft_number
+      = f.number_field :peoplesoft_number, class: 'form-control', placeholder: resource.peoplesoft_number
+    %hr
+    .form-group
+      = f.label :current_password, 'Current password'
+      = f.password_field :current_password, autocomplete: 'off', class: 'form-control', placeholder: 'Needed to confirm changes'
+
+    = f.submit 'Update', class: 'btn btn-lg btn-primary'
