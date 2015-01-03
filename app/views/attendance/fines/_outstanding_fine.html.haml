@@ -1,0 +1,7 @@
+%tr
+  %td= fine.user.name
+  %td= fine.event.name
+  %td= format_date(fine.event.date)
+  %td= "$ #{ fine.event.fine }"
+  %td= fine.format_paid
+  %td= button_to 'Mark as paid', fine_path(fine), method: :patch, params: { paid: true }, class: 'btn btn-success btn-sm btn-block'

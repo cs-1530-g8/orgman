@@ -5,10 +5,15 @@ class Attendance::FinesController < ApplicationController
     @fines = current_user.fines.decorate
   end
 
+  def outstanding_fines
+    @fines = Fine.where(paid: false).decorate
+  end
+
   def update
-    fine = Fine.find(params[:fine_id])
+    fine = Fine.find(params[:id])
     paid = params[:paid] == 'true' ? true : false
     fine.update(paid: paid)
+    redirect_to outstanding_fines_path
   end
 
   def update_fines
