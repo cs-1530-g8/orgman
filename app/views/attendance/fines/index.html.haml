@@ -1,0 +1,9 @@
+%h2 My fines
+%p If you believe you recieved a fine in error please talk to your admin. 
+%p If the status of your fine is incorrect please ask your admin to update the fines.
+%table.table.table-striped
+  %th Event Name
+  %th Event Date
+  %th Fine amount
+  %th Status
+  =render partial: 'attendance/fines/fine', collection: @fines, as: :fine

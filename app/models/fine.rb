@@ -1,6 +1,4 @@
-class Event < ActiveRecord::Base
-  before_save { self.name = name.titleize }
-
+class Fine < ActiveRecord::Base
   # Constants ##################################################################
 
   # Validations ################################################################
@@ -9,19 +7,9 @@ class Event < ActiveRecord::Base
 
   # Associations ###############################################################
 
-  has_many :attendances
-  has_many :users, through: :attendances
-  has_many :fines, through: :attendances
-  has_many :excuses
-  belongs_to :event_type
+  belongs_to :user
+  has_one :attendance
+  has_one :event, through: :attendance
 
   # Helpers ####################################################################
-
-  def attended_users
-    self.attendances.where(present: true).collect(&:user)
-  end
-
-  def absent_users
-    self.attendances.where(present: false).collect(&:user)
-  end
 end

@@ -1,0 +1,9 @@
+%h2 Outstanding fines
+%table.table.table-striped
+  %th User's Name
+  %th Event Name
+  %th Event Date
+  %th Amount
+  %th Status
+  %th Mark as paid
+  =render partial: 'attendance/fines/outstanding_fine', collection: @fines, as: :fine
