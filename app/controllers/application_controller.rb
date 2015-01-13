@@ -18,8 +18,8 @@ class ApplicationController < ActionController::Base
     event_type = event.event_type
 
     unless current_user && (current_user.position == User.secretary ||
-                            current_user.position == event_type.name.downcase )
-      flash[:notice]= "Sorry! You are not authorized to edit #{event_type.name}
+                            current_user.position == event_type.name.downcase)
+      flash[:notice] = "Sorry! You are not authorized to edit #{event_type.name}
                        events."
       redirect_to root_path
     end
