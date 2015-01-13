@@ -41,7 +41,8 @@ class EventDecorator < Draper::Decorator
   end
 
   def format_edit_link(member)
-    if member_can_edit_event_type(member, object.event_type_id)
+    if member.position == User.secretary ||
+       member.position == object.event_type.name
       h.link_to event.name, h.edit_event_path(object)
     else
       h.link_to event.name, h.event_path(object)

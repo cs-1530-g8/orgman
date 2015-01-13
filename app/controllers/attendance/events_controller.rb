@@ -2,16 +2,9 @@ class Attendance::EventsController < ApplicationController
   include EventsHelper
 
   before_action :authenticate_user!
-  before_action -> { member_can_edit_event(current_user, params[:id]) },
-                   only: [:edit]
-  before_action -> {
-    unless member_can_edit_event_type(current_user,
-                                      params[:event][:event_type_id])
-      flash[:alert] = "Sorry you are not authorized to edit this event!"
-      redirect_to event_path(event_id)
-    end
-  }, only: [:create, :update]
-
+  before_action -> { can_edit_event(params[:id]) }, only: [:edit]
+  before_action -> { can_edit_event(params[:event][:id]) }, only: [:create,
+                                                                   :update]
   # todo only events from current semester
   def index
     @events = Event.all.decorate
