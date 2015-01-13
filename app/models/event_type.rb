@@ -26,7 +26,10 @@ class EventType < ActiveRecord::Base
     order(:name)
   }
   scope :not_required, -> {
-    where("points_required = 0 AND percentage_attendance_required = 0").
+    where("(points_required = 0 OR points_required IS NULL) AND
+           (percentage_attendance_required = 0 OR
+            percentage_attendance_required IS NULL) ").
+    where(points_required: nil, percentage_attendance_required: nil).
     order(:name)
   }
 
