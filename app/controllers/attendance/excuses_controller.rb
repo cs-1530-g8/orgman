@@ -1,5 +1,7 @@
 class Attendance::ExcusesController < ApplicationController
   before_action :authenticate_user!
+  before_action -> { user_has_position(User.secretary) },
+                only: [:destroy, :process_excuse, :pending_excuses]
 
   def index
     @excuse = Excuse.new

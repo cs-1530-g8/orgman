@@ -1,5 +1,7 @@
 class Attendance::FinesController < ApplicationController
   before_action :authenticate_user!, except: [:update_fines]
+  before_action -> { user_has_position(User.secretary) },
+                only: [:outstanding_fines]
 
   def index
     @fines = current_user.fines.decorate
