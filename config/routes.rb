@@ -40,6 +40,8 @@ Rails.application.routes.draw do
   get  'update_users'     => 'update_users#index',            as: :update_users
   post 'update_status'    => 'update_users#update_status',    as: :update_status
   post 'update_positions' => 'update_users#update_positions', as: :update_positions
+  post 'update_event_type_admin' => 'update_users#update_event_type_admin',
+       as: :update_event_type_admin
 
   resources :event_types, controller: 'attendance/event_types' do
     get :delete, on: :member
