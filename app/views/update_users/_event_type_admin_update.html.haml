@@ -1,0 +1,6 @@
+= hidden_field_tag 'event_type_id', event_type.id
+.form-group.row
+  .col-sm-2
+    = label event_type.name, event_type.name + ':'
+  .col-sm-1
+    = select_tag event_type.name, options_from_collection_for_select(User.active, "id", "name", user_id_for_position(event_type.name)), prompt: '(choose a chairmen)'
