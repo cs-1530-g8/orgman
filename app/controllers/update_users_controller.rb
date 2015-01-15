@@ -38,6 +38,13 @@ class UpdateUsersController < ApplicationController
     redirect_to update_users_path
   end
 
+  def update_event_type_admin
+    EventType.all.each do |et|
+      update_position_for_user_id(params[:"#{et.name}"], et.name)
+    end
+    redirect_to update_users_path
+  end
+
   private
 
   def update_position_for_user_id(user_id, position)
