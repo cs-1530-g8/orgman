@@ -1,5 +1,5 @@
 .form-group
+  .col-sm-2
+    = label value, title + ':'
   .col-sm-1
-    = label value, title
-  .col-sm-1
-    = select_tag value, options_from_collection_for_select(User.active.sort_by { |u| [u.last_name, u.first_name] } , "id", "name", id), prompt: '(choose a leader)'
+    = select_tag value, options_from_collection_for_select(User.active, "id", "name", id), prompt: '(choose a leader)'

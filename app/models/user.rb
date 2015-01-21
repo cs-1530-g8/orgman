@@ -65,10 +65,14 @@ class User < ActiveRecord::Base
 
   # Scopes #####################################################################
 
-  scope :active,   -> { where("status = 'active'") }
-  scope :alumni,   -> { where("status = 'alumni'") }
-  scope :pending,  -> { where("status = 'pending'") }
-  scope :inactive, -> { where("status = 'inactive'") }
+  scope :active,   -> { where("status = 'active'").
+                        sort_by { |u| [u.last_name, u.first_name] } }
+  scope :alumni,   -> { where("status = 'alumni'").
+                        sort_by { |u| [u.last_name, u.first_name] } }
+  scope :pending,  -> { where("status = 'pending'").
+                        sort_by { |u| [u.last_name, u.first_name] } }
+  scope :inactive, -> { where("status = 'inactive'").
+                        sort_by { |u| [u.last_name, u.first_name] } }
 
   # Associations ###############################################################
 
