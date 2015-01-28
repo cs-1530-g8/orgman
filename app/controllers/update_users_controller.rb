@@ -1,5 +1,6 @@
 class UpdateUsersController < ApplicationController
   before_filter :authenticate_user!
+  before_action -> { user_has_position(User.secretary) }
 
   def index
   end
