@@ -27,38 +27,36 @@ Rails.application.routes.draw do
     get    'unlock'   => 'devise/unlocks#new',          as: :new_user_unlock
   end
 
-  get 'pending_approvals' => 'admin/users#pending_approvals', as: :pending_approvals
-  post 'approve_user'     => 'admin/users#approve_user',      as: :approve_user
-  post 'reject_user'      => 'admin/users#reject_user',       as: :reject_user
-
-  get 'index' => 'external#index', as: :external_index
-
-  get 'leaderboard' => 'attendance/leaderboard#index', as: :leaderboard
-
+  root 'external#index'
   get 'dashboard' => 'dashboard', as: :dashboard
 
-  get  'update_users'     => 'update_users#index',            as: :update_users
-  post 'update_status'    => 'update_users#update_status',    as: :update_status
-  post 'update_positions' => 'update_users#update_positions', as: :update_positions
-  post 'update_event_type_admin' => 'update_users#update_event_type_admin',
+  #### User Admin ##############################################################
+  get 'pending_approvals' => 'admin/users#pending_approvals',   as: :pending_approvals
+  post 'approve_user'     => 'admin/users#approve_user',        as: :approve_user
+  post 'reject_user'      => 'admin/users#reject_user',         as: :reject_user
+  get  'update_users'     => 'admin/users#update_users', as: :update_users
+  post 'update_status'    => 'admin/users#update_status',      as: :update_status
+  post 'update_positions' => 'admin/users#update_positions',   as: :update_positions
+  post 'update_event_type_admin' => 'admin/users#update_event_type_admin',
        as: :update_event_type_admin
 
-  resources :event_types, controller: 'attendance/event_types' do
-    get :delete, on: :member
-  end
-
+  #### Quick Links #############################################################
   resources :links, except: [:show, :destroy, :edit, :update, :new] do
     post :deactivate, on: :member
   end
 
+  #### Attendance ##############################################################
+  get 'leaderboard'        => 'attendance/leaderboard#index', as: :leaderboard
   get  'outstanding_fines' => 'attendance/fines#outstanding_fines', as: :outstanding_fines
   get  'pending_excuses'   => 'attendance/excuses#pending_excuses', as: :pending_excuses
   post 'process_excuse'    => 'attendance/excuses#process_excuse',  as: :process_excuse
   resources :events, controller: 'attendance/events'
-  resources :fines, controller: 'attendance/fines', only: [:index, :update]
-  resources :attendances, only: [:update], controller: 'attendance/attendances'
+  resources :fines, controller: 'attendance/fines', only: [ :index, :update ]
+  resources :attendances, controller: 'attendance/attendances', only: [ :update ]
   resources :excuses, controller: 'attendance/excuses', only: [ :index, :create,
                                                                 :destroy ]
+  resources :event_types, controller: 'attendance/event_types' do
+    get :delete, on: :member
+  end
 
-  root 'external#index'
 end
