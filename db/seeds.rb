@@ -20,6 +20,6 @@ standard_user.confirm!
 
 EventType.create(name: 'Miscellaneous')
 
+Position.create(name: 'Secretary', user_id: 1)
 Position.create(name: 'President', user_id: 1)
 Position.create(name: 'Treasurer', user_id: 1)
-Position.create(name: 'Secretary', user_id: 1)
