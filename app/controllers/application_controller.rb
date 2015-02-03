@@ -15,9 +15,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def can_edit_event(event_id)
-    event = Event.find(event_id)
-    event_type = event.event_type
+  def can_edit_event_type(event_type_id)
+    event_type = EventType.find(event_type_id)
 
     unless current_user && !current_user.position.nil? &&
            (current_user.position.event_type_id == event_type.id ||
@@ -26,5 +25,10 @@ class ApplicationController < ActionController::Base
                        events."
       redirect_to root_path
     end
+  end
+
+  def can_edit_event(event_id)
+    event = Event.find(event_id)
+    can_edit_event_type(event.event_type.id)
   end
 end
