@@ -31,14 +31,12 @@ Rails.application.routes.draw do
   get 'dashboard' => 'dashboard', as: :dashboard
 
   #### User Admin ##############################################################
-  get 'pending_approvals' => 'admin/users#pending_approvals',   as: :pending_approvals
-  post 'approve_user'     => 'admin/users#approve_user',        as: :approve_user
-  post 'reject_user'      => 'admin/users#reject_user',         as: :reject_user
-  get  'update_users'     => 'admin/users#update_users', as: :update_users
-  post 'update_status'    => 'admin/users#update_status',      as: :update_status
-  post 'update_positions' => 'admin/users#update_positions',   as: :update_positions
-  post 'update_event_type_admin' => 'admin/users#update_event_type_admin',
-       as: :update_event_type_admin
+  get 'pending_approvals' => 'admin/users#pending_approvals', as: :pending_approvals
+  post 'approve_user'     => 'admin/users#approve_user',      as: :approve_user
+  post 'reject_user'      => 'admin/users#reject_user',       as: :reject_user
+  get  'update_users'     => 'admin/users#update_users',      as: :update_users
+  post 'update_status'    => 'admin/users#update_status',     as: :update_status
+  resources :positions, controller: 'admin/positions', only: [ :create, :update, :destroy ]
 
   #### Quick Links #############################################################
   resources :links, except: [:show, :destroy, :edit, :update, :new] do
@@ -46,10 +44,12 @@ Rails.application.routes.draw do
   end
 
   #### Attendance ##############################################################
-  get 'leaderboard'        => 'attendance/leaderboard#index', as: :leaderboard
+  get 'leaderboard'        => 'attendance/leaderboard#index',       as: :leaderboard
   get  'outstanding_fines' => 'attendance/fines#outstanding_fines', as: :outstanding_fines
+  get  'update_fines'      => 'attendance/fines#update_fines',      as: :update_fines
   get  'pending_excuses'   => 'attendance/excuses#pending_excuses', as: :pending_excuses
   post 'process_excuse'    => 'attendance/excuses#process_excuse',  as: :process_excuse
+
   resources :events, controller: 'attendance/events'
   resources :fines, controller: 'attendance/fines', only: [ :index, :update ]
   resources :attendances, controller: 'attendance/attendances', only: [ :update ]
