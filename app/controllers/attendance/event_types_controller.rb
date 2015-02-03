@@ -11,7 +11,10 @@ class Attendance::EventTypesController < ApplicationController
     @event_type = EventType.new(event_type_params)
 
     if @event_type.save
-      flash[:notice] = "#{@event_type.name} created successfully."
+      position = Position.create(event_type: @event_type)
+      if position.save
+        flash[:notice] = "#{@event_type.name} created successfully."
+      end
     else
       flash[:alert] = "\"#{@event_type.name}\" was not created"
     end
@@ -36,13 +39,17 @@ class Attendance::EventTypesController < ApplicationController
     @events = @event_type.events
     @events.update_all(event_type_id: 1)
 
-    if @event_type.destroy!
-      flash[:notice] = "\"#{@event_type.name}\" was deleted."
-      redirect_to(event_types_path)
+    if @event_type.position.destroy!
+      if @event_type.destroy!
+        flash[:notice] = "\"#{@event_type.name}\" was deleted."
+      else
+        flash[:alert] = "Deleting \"#{@event_type.name}\" failed."
+      end
     else
       flash[:alert] = "Deleting \"#{@event_type.name}\" failed."
-      redirect_to(event_type_path)
     end
+
+    redirect_to(event_types_path)
   end
 
   private
