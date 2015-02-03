@@ -5,9 +5,13 @@ class Position < ActiveRecord::Base
 
   # Scopes #####################################################################
 
+  scope :exec,             -> { where(event_type_id: nil) }
+  scope :event_type_admin, -> { where(name: nil) }
+
   # Associations ###############################################################
 
   belongs_to :user
+  belongs_to :event_type
 
   # Helpers ####################################################################
 

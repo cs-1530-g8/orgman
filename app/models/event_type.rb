@@ -36,6 +36,7 @@ class EventType < ActiveRecord::Base
   # Associations ###############################################################
 
   has_many :events
+  has_one  :position
 
   # Helpers ####################################################################
 
