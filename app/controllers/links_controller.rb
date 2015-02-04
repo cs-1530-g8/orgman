@@ -11,15 +11,19 @@ class LinksController < ApplicationController
     username = 'pittdxc'
     api_key =  'R_d469a17c98cb6fb08631749d447bab82'
 
-    @new_link = Link.new(link_params)
-    @new_link.user_id = current_user.id
+    link = Link.new(link_params)
+    link.user_id = current_user.id
+
+    if link.expiration.nil?
+      link.expiration = Date.today + 36500
+    end
 
     Bitly.use_api_version_3
     bitly = Bitly.new(username, api_key)
-    short = bitly.shorten(@new_link.url)
-    @new_link.url = short.short_url
+    short = bitly.shorten(link.url)
+    link.url = short.short_url
 
-    @new_link.save
+    link.save
     redirect_to links_path
   end
 
