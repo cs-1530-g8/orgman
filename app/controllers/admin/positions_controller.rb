@@ -18,6 +18,7 @@ class Admin::PositionsController < ApplicationController
     else
       flash[:alert] = "\"#{position.name}\" was not created successfully"
     end
+    redirect_to update_users_path
   end
 
   def destroy
@@ -31,11 +32,12 @@ class Admin::PositionsController < ApplicationController
         flash[:notice] = "#{position.name} deleted successfully."
       end
     end
+    redirect_to update_users_path
   end
 
   private
 
   def position_params
-    params.require(:position).permit(:user_id)
+    params.require(:position).permit(:name, :user_id)
   end
 end
