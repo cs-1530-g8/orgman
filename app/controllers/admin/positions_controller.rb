@@ -23,7 +23,7 @@ class Admin::PositionsController < ApplicationController
 
   def destroy
     position = Position.find(params[:id])
-    if position.is_default_position?
+    if position.default_position?
       flash[:alert] = "You may not delete the #{position.name} position because
                        it is a default position."
     else

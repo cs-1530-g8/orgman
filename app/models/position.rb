@@ -15,7 +15,7 @@ class Position < ActiveRecord::Base
 
   # Helpers ####################################################################
 
-  def is_default_position?
+  def default_position?
     is_default_position = false
     default_exec = ['Secretary', 'President', 'Treasurer']
     default_event_type_admin = [1]
