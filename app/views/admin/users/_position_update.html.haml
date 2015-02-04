@@ -8,3 +8,6 @@
       = f.collection_select :user_id, User.active, :id, :name, prompt: '(choose a leader)'
     .form-group.col-sm-1
       = submit_tag position.user_id.nil? ? 'Create' : 'Update', class: 'btn btn-success form-control'
+    .form-group.col-sm-1
+  .col-sm-1
+  = position.render_delete_button
