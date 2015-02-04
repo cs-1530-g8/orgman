@@ -17,16 +17,4 @@ module EventsHelper
       "Spring #{year_semester / 10}"
     end
   end
-
-  def excusable_events
-    required_events = []
-    EventType.required.each do |et|
-      et.events.each do |e|
-        if e.date > DateTime.now && e.self_submit_excuse
-          required_events.push(e)
-        end
-      end
-    end
-    required_events
-  end
 end
