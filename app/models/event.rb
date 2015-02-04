@@ -7,6 +7,8 @@ class Event < ActiveRecord::Base
 
   # Scopes #####################################################################
 
+  scope :excusable, -> { where(self_submit_excuse: true) }
+
   # Associations ###############################################################
 
   has_many :attendances
