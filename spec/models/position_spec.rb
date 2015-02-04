@@ -5,6 +5,6 @@ describe Position do
 
   subject { @position }
 
-  it {should respond_to(:name) }
-  it {should respond_to(:user_id) }
+  it { should respond_to(:name) }
+  it { should respond_to(:user_id) }
 end

@@ -11,7 +11,7 @@ class Attendance::EventTypesController < ApplicationController
     @event_type = EventType.new(event_type_params)
 
     if @event_type.save
-      position = Position.create(event_type: @event_type)
+      position = Position.new(event_type: @event_type)
       if position.save
         flash[:notice] = "#{@event_type.name} created successfully."
       end

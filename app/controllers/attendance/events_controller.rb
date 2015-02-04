@@ -2,9 +2,9 @@ class Attendance::EventsController < ApplicationController
   include EventsHelper
 
   before_action :authenticate_user!
-  before_action -> { can_edit_event(params[:id]) }, only: [:edit, :update ]
+  before_action -> { can_edit_event(params[:id]) }, only: [:edit, :update]
   before_action -> { can_edit_event_type(params[:event][:event_type_id]) },
-                only: [ :create ]
+                only: [:create]
 
   # todo only events from current semester
   def index

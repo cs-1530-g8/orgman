@@ -4,9 +4,9 @@ class Admin::PositionsController < ApplicationController
   def update
     position = Position.find(params[:id])
     if position.update(position_params)
-      flash[:notice] = "Event Type Admins updated successfully"
+      flash[:notice] = "Positions updated successfully"
     else
-      flash[:alert] = "Event Type Admins updated successfully"
+      flash[:alert] = "Positions updated successfully"
     end
     redirect_to update_users_path
   end
