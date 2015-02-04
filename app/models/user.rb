@@ -37,6 +37,7 @@ class User < ActiveRecord::Base
   has_many :excuses
   has_many :fines
   has_one :position
+  has_many :links
 
   # Helpers ####################################################################
 
