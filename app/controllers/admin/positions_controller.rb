@@ -22,7 +22,7 @@ class Admin::PositionsController < ApplicationController
   end
 
   def destroy
-    position = Position.find[:id]
+    position = Position.find(params[:id])
     default_positions = Position.where('id < 5')
     if default_positions.include?(position)
       flash[:alert] = "You may not delete the #{position.name} position because
