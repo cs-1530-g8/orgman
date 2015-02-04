@@ -1,5 +1,5 @@
 class Admin::PositionsController < ApplicationController
-  before_action -> { user_has_position(Position.first) }
+  before_action -> { user_has_position("Secretary") }
 
   def update
     position = Position.find(params[:id])

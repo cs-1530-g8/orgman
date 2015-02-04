@@ -30,7 +30,7 @@ class EventDecorator < Draper::Decorator
 
   def valid_event_types(member)
     position = member.position
-    if position == Position.first
+    if position == Position.find_by(name: 'Secretary')
       EventType.all
     else
       position.event_type
@@ -38,7 +38,7 @@ class EventDecorator < Draper::Decorator
   end
 
   def format_edit_link(member)
-    if member.position == Position.first ||
+    if member.position == Position.find_by(name: 'Secretary') ||
       member.position.event_type_id == object.event_type.id
       h.link_to event.name, h.edit_event_path(object)
     else
