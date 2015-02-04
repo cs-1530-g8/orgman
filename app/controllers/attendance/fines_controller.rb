@@ -20,10 +20,10 @@ class Attendance::FinesController < ApplicationController
 
   def update_fines
     Event.all.each do |event|
-      if event.date < DateTime.now && event.event_type.required?
+      if event.date < DateTime.now && event.fine.present?
         event.attendances.each do |attendance|
-          if attendance.fine_id.blank? && attendance.excused != true &&
-            attendance.present != true && attendance.event.fine > 0
+          if attendance.fine.nil? && attendance.excused != true &&
+            attendance.present != true
             fine = Fine.new
             fine.user_id = attendance.user_id
             fine.attendance_id = attendance.id
