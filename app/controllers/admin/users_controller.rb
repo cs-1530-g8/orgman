@@ -36,7 +36,12 @@ class Admin::UsersController < ApplicationController
     redirect_to(pending_approvals_path)
   end
 
+  #### Update Users ############################################################
+
   def update_users
+    @new_position = Position.new.decorate
+    @execs = Position.exec.decorate
+    @event_type_admins = Position.event_type_admin.decorate
   end
 
   def update_status
