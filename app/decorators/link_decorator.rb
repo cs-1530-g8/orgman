@@ -11,7 +11,7 @@ class LinkDecorator < Draper::Decorator
   #   end
 
   def format_expiration
-    if expiration
+    if expiration < Date.today + 18250
       expiration.strftime("%A, %B #{expiration.day.ordinalize} %Y")
     else
       'never'

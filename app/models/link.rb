@@ -3,13 +3,17 @@ class Link < ActiveRecord::Base
 
   # Validations ################################################################
 
+  validates :user_id, presence: true
+
   # Scopes #####################################################################
 
   scope :active, -> {
-    where("expiration >= :today", today: Date.today) .order(:name)
+    where("expiration >= :today", today: Date.today).order(:name)
   }
 
   # Associations ###############################################################
+
+  belongs_to :user
 
   # Helpers ####################################################################
 
