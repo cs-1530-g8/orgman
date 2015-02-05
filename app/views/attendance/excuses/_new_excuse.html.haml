@@ -4,7 +4,7 @@
       .col-sm-2
         = f.label :excuse, 'Event:'
       .col-sm-10
-        = f.collection_select :event_id, EventDecorator.decorate_collection(excusable_events()), :id, :name_and_date, class: 'form-control'
+        = f.collection_select :event_id, Event.excusable.decorate, :id, :name_and_date, class: 'form-control'
 
     .form-group
       .col-sm-2
