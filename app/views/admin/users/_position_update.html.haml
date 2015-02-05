@@ -1,5 +1,13 @@
-.form-group
-  .col-sm-2
-    = label value, title + ':'
+.row
+  = form_for position, class: 'form-horizontal' do |f|
+    .form-group.col-sm-2
+      = f.label :name
+      = position.format_name_field
+    .form-group.col-sm-2
+      = f.label :user_id, 'User Holding Position'
+      = f.collection_select :user_id, User.active, :id, :name, prompt: '(choose a leader)'
+    .form-group.col-sm-1
+      = submit_tag position.user_id.nil? ? 'Create' : 'Update', class: 'btn btn-success form-control'
+    .form-group.col-sm-1
   .col-sm-1
-    = select_tag value, options_from_collection_for_select(User.active, "id", "name", id), prompt: '(choose a leader)'
+  = position.render_delete_button

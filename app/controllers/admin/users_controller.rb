@@ -1,7 +1,9 @@
 class Admin::UsersController < ApplicationController
 
   before_filter :authenticate_user!
-  before_action -> { user_has_position(User.secretary) }
+  before_action -> { user_has_position("Secretary") }
+
+  #### Pending Approvals #######################################################
 
   def pending_approvals
     @users = User.where(approved: false)
@@ -34,7 +36,12 @@ class Admin::UsersController < ApplicationController
     redirect_to(pending_approvals_path)
   end
 
+  #### Update Users ############################################################
+
   def update_users
+    @new_position = Position.new.decorate
+    @execs = Position.exec.decorate
+    @event_type_admins = Position.event_type_admin.decorate
   end
 
   def update_status
@@ -52,45 +59,5 @@ class Admin::UsersController < ApplicationController
 
     flash[:notice] = 'Status updated successfully'
     redirect_to update_users_path
-  end
-
-  def update_positions
-    update_position_for_user_id(params[:president], User.president)
-    update_position_for_user_id(params[:vice_president], User.vice_president)
-    update_position_for_user_id(params[:secretary], User.secretary)
-    update_position_for_user_id(params[:treasurer], User.treasurer)
-    update_position_for_user_id(params[:alumni_relations], User.alumni_relations)
-    update_position_for_user_id(params[:risk_manager], User.risk_manager)
-    update_position_for_user_id(params[:recruitment], User.recruitment)
-    update_position_for_user_id(params[:social], User.social)
-    update_position_for_user_id(params[:amc], User.amc)
-    update_position_for_user_id(params[:jamc], User.jamc)
-    update_position_for_user_id(params[:house_manager], User.house_manager)
-
-    flash[:notice] = 'Positions updated successfully'
-    redirect_to update_users_path
-  end
-
-  def update_event_type_admin
-    EventType.all.each do |et|
-      update_position_for_user_id(params[:"#{et.name}"], et.name)
-    end
-    redirect_to update_users_path
-  end
-
-  private
-
-  def update_position_for_user_id(user_id, position)
-    # Clear the old position holder
-    old_user_with_position = User.find_by(position: position)
-    if old_user_with_position
-      old_user_with_position.update(position: nil)
-    end
-
-    # Set the new position holder
-    if !user_id.blank?
-      user = User.find(user_id)
-      user.update(position: position)
-    end
   end
 end

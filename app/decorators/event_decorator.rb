@@ -29,20 +29,17 @@ class EventDecorator < Draper::Decorator
   end
 
   def valid_event_types(member)
-    if member.position == 'secretary'
+    position = member.position
+    if position == Position.find_by(name: 'Secretary')
       EventType.all
     else
-      editable_event_types = EventType.where(name: member.position)
-      if member.position == 'Risk Manager'
-        editable_event_types += EventType.where(name: 'Ritual Review')
-      end
-      editable_event_types
+      position.event_type
     end
   end
 
   def format_edit_link(member)
-    if member.position == User.secretary ||
-       member.position == object.event_type.name
+    if member.position == Position.find_by(name: 'Secretary') ||
+      member.position.event_type_id == object.event_type.id
       h.link_to event.name, h.edit_event_path(object)
     else
       h.link_to event.name, h.event_path(object)

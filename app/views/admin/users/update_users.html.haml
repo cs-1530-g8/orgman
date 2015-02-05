@@ -13,31 +13,17 @@
       .bs-callout-warning
         %h4 Users may only hold one position
         %p Users may only hold one position at a time. If you need additional functionality please contact your administrator.
-    = form_tag update_positions_path, class: 'form-horizontal' do
-      = render partial: 'admin/users/position_update', locals: { value: :president, title: 'President', id: user_id_for_position(User.president) }
-      = render partial: 'admin/users/position_update', locals: { value: :vice_president, title: 'Vice President', id: user_id_for_position(User.vice_president) }
-      = render partial: 'admin/users/position_update', locals: { value: :secretary, title: 'Secretary', id: user_id_for_position(User.secretary) }
-      = render partial: 'admin/users/position_update', locals: { value: :treasurer, title: 'Treasurer', id: user_id_for_position(User.treasurer) }
-      = render partial: 'admin/users/position_update', locals: { value: :alumni_relations, title: 'Alumni Relations', id: user_id_for_position(User.alumni_relations) }
-      = render partial: 'admin/users/position_update', locals: { value: :risk_manager, title: 'Risk Manager', id: user_id_for_position(User.risk_manager) }
-      = render partial: 'admin/users/position_update', locals: { value: :recruitment, title: 'Recruitment', id: user_id_for_position(User.recruitment) }
-      = render partial: 'admin/users/position_update', locals: { value: :social, title: 'Social', id: user_id_for_position(User.social) }
-      = render partial: 'admin/users/position_update', locals: { value: :amc, title: 'AMC', id: user_id_for_position(User.amc) }
-      = render partial: 'admin/users/position_update', locals: { value: :jamc, title: 'JAMC', id: user_id_for_position(User.jamc) }
-      = render partial: 'admin/users/position_update', locals: { value: :house_manager, title: 'House Manager', id: user_id_for_position(User.house_manager) }
+    = render partial: 'admin/users/position_update', collection: @execs, as: :position
+    %h4 Add a new position
+    = render partial: 'admin/users/position_update', locals: { position: @new_position }
 
-      .form-group.col-sm-2
-        = submit_tag 'Update Positions', class: 'btn btn-success form-control'
 .container
   .row
     %hr
-    %h1 Update Chairmen
+    %h1 Update Event Type Admin(s)
     .bs-callout
       .bs-callout-warning
-        %h4 Users may only hold one chairmen position at a time
+        %h4 Users may only administrate one event type at a time
         %p These positions correlate to event types. A user may be assigned to manage a specific event type.
         %p Leave the user blank if you want to be the sole administrator of an event type.
-    = form_tag update_event_type_admin_path, class: 'form-horizontal'  do
-      = render partial: 'admin/users/event_type_admin_update', collection: EventType.all, as: :event_type
-      .form-group.col-sm-2
-        = submit_tag 'Update Chairmen', class: 'btn btn-success form-control'
+    = render partial: 'admin/users/position_update', collection: @event_type_admins, as: :position

@@ -6,22 +6,29 @@ class ApplicationController < ActionController::Base
 
   # Before Actions #############################################################
 
-  def user_has_position(position)
+  def user_has_position(position_string)
+    position = Position.find_by(name: position_string)
     unless current_user && current_user.position == position
-      flash[:notice] = "Sorry but you must be the #{position} to view that page"
+      flash[:notice] = "Sorry but you must be the #{position.name} to view that
+                        page"
+      redirect_to root_path
+    end
+  end
+
+  def can_edit_event_type(event_type_id)
+    event_type = EventType.find(event_type_id)
+
+    unless current_user && !current_user.position.nil? &&
+           (current_user.position.event_type_id == event_type.id ||
+            current_user.position == Position.find_by(name: 'Secretary'))
+      flash[:notice] = "Sorry! You are not authorized to edit #{event_type.name}
+                       events."
       redirect_to root_path
     end
   end
 
   def can_edit_event(event_id)
     event = Event.find(event_id)
-    event_type = event.event_type
-
-    unless current_user && (current_user.position == User.secretary ||
-                            current_user.position == event_type.name.downcase)
-      flash[:notice] = "Sorry! You are not authorized to edit #{event_type.name}
-                       events."
-      redirect_to root_path
-    end
+    can_edit_event_type(event.event_type.id)
   end
 end

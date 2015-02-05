@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141230235709) do
+ActiveRecord::Schema.define(version: 20150130201130) do
 
   create_table "attendances", force: true do |t|
     t.integer  "user_id"
@@ -71,6 +71,14 @@ ActiveRecord::Schema.define(version: 20141230235709) do
     t.integer  "user_id"
   end
 
+  create_table "positions", force: true do |t|
+    t.string   "name"
+    t.string   "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "event_type_id"
+  end
+
   create_table "users", force: true do |t|
     t.string   "email",                  default: "",    null: false
     t.string   "encrypted_password",     default: "",    null: false
@@ -99,7 +107,6 @@ ActiveRecord::Schema.define(version: 20141230235709) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "approved",               default: false, null: false
-    t.string   "position"
     t.string   "status"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
