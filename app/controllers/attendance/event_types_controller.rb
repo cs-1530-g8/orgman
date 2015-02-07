@@ -34,7 +34,7 @@ class Attendance::EventTypesController < ApplicationController
     end
   end
 
-  def delete
+  def destroy
     @event_type = EventType.find(params[:id])
     @events = @event_type.events
     @events.update_all(event_type_id: 1)
