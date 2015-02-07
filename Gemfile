@@ -24,7 +24,7 @@ gem 'bootstrap-sass-extras'
 gem 'autoprefixer-rails'
 
 group :development, :test do
-  gem 'rspec-rails', '~> 2.14.2'
+  gem 'rspec-rails', '~> 3.2'
   gem 'sqlite3'
   gem 'awesome_print'
 
