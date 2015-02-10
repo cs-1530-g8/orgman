@@ -35,7 +35,8 @@
         = f.fields_for :attendances do |at|
           = at.collection_select :user_ids, User.active, :id, :name,
             { selected: @event.attended_users.map { |user| user.id} },
-            { multiple: true, class: 'select2'}
+            { multiple: true, class: 'select2', style: 'width: 75%',
+              placeholder: 'Type or click to select attendees'}
 
     .form-group
       .col-sm-2

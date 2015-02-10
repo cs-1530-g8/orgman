@@ -22,6 +22,7 @@ gem 'haml'
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'bootstrap-sass-extras'
 gem 'autoprefixer-rails'
+gem 'select2-rails'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.2'
