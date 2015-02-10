@@ -13,11 +13,24 @@ describe Event do
   it { should respond_to(:semester) }
   it { should respond_to(:event_type_id) }
 
-  before do
-    @event = Event.new(name: "chapter meeting", date: Time.now,
-                              semester: 20142, event_type_id: 1)
+  it 'with all required fields' do
+    event = Event.new(name: 'event', semester: 20141, event_type_id: 1,
+                       date: Date.today)
+    expect(event).to be_valid
   end
 
-  it { should be_valid }
+  it 'without name' do
+    event = Event.new(semester: 20141, event_type_id: 1, date: Date.today)
+    expect(event).to be_invalid
+  end
 
+  it 'without semester' do
+    event = Event.new(name: 'event', event_type_id: 1, date: Date.today)
+    expect(event).to be_invalid
+  end
+
+  it 'without name' do
+    event = Event.new(semester: 20141, event_type_id: 1, date: Date.today)
+    expect(event).to be_invalid
+  end
 end

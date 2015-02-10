@@ -6,7 +6,8 @@ class Event < ActiveRecord::Base
   # Validations ################################################################
 
   validates :name, presence: true
-  validates :semester, presence: true
+  validates :semester, presence: true, numericality: { only_integer: true },
+            length: { is: 5 }
   validates :event_type_id, presence: true
   validates :date, presence: true
 
