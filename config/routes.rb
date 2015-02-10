@@ -51,12 +51,10 @@ Rails.application.routes.draw do
   post 'process_excuse'    => 'attendance/excuses#process_excuse',  as: :process_excuse
 
   resources :events, controller: 'attendance/events'
-  resources :fines, controller: 'attendance/fines', only: [ :index, :update ]
-  resources :attendances, controller: 'attendance/attendances', only: [ :update ]
-  resources :excuses, controller: 'attendance/excuses', only: [ :index, :create,
-                                                                :destroy ]
-  resources :event_types, controller: 'attendance/event_types' do
-    get :delete, on: :member
-  end
+  resources :fines, controller: 'attendance/fines', only: [:index, :update]
+  resources :attendances, controller: 'attendance/attendances', only: [:update]
+  resources :event_types, controller: 'attendance/event_types', except: [:show]
+  resources :excuses, controller: 'attendance/excuses', only: [:index, :create,
+                                                                :destroy]
 
 end
