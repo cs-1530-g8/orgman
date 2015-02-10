@@ -8,6 +8,7 @@ gem 'draper', '~>1.3'
 gem 'paperclip'
 gem 'rubocop', require: false
 gem 'bitly'
+gem 'select2-rails'
 
 # Authentication
 gem 'devise'
