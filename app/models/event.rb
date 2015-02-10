@@ -5,6 +5,11 @@ class Event < ActiveRecord::Base
 
   # Validations ################################################################
 
+  validates :name, presence: true
+  validates :semester, presence: true
+  validates :event_type_id, presence: true
+  validates :date, presence: true
+
   # Scopes #####################################################################
 
   scope :excusable, -> { where(self_submit_excuse: true) }

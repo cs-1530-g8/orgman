@@ -11,13 +11,11 @@ admin = User.create!(first_name: 'Alex', last_name: 'Vallejo',
                      email: 'email@example.com', password: 'password',
                      password_confirmation: 'password', approved: true,
                      status: 'active')
-admin.confirm!
 
 standard_user = User.create!(first_name: 'Drew', last_name: 'Land',
-                     email: 'drew@example.com', password: 'password',
-                     password_confirmation: 'password', approved: true,
-                     status: 'active')
-standard_user.confirm!
+                             email: 'drew@example.com', password: 'password',
+                             password_confirmation: 'password', approved: true,
+                             status: 'active')
 
 # Create the defailt exec positions and assign all to the default user
 Position.create(name: 'Secretary', user_id: 1)
