@@ -14,3 +14,12 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+//= require select2
+
+var ready;
+ready = function() {
+  $(".select2").select2();
+};
+
+$(document).ready(ready);
+$(document).on('page:load', ready);
