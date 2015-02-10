@@ -8,12 +8,12 @@
 
 # Create default users, one admin and one standard
 admin = User.create!(first_name: 'Alex', last_name: 'Vallejo',
-                     email: 'vallejo.alex@gmail.com', password: 'password',
+                     email: 'email@example.com', password: 'password',
                      password_confirmation: 'password', approved: true,
                      status: 'active')
 
 standard_user = User.create!(first_name: 'Drew', last_name: 'Land',
-                             email: 'alex.v@pitt.edu', password: 'password',
+                             email: 'drew@example.com', password: 'password',
                              password_confirmation: 'password', approved: true,
                              status: 'active')
 
