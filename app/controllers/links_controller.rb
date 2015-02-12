@@ -12,7 +12,6 @@ class LinksController < ApplicationController
     api_key =  'R_d469a17c98cb6fb08631749d447bab82'
 
     link = Link.new(link_params)
-    link.user_id = current_user.id
 
     if link.expiration.nil?
       link.expiration = Date.today + 36500
@@ -29,8 +28,9 @@ class LinksController < ApplicationController
 
   def deactivate
     link = Link.find(params[:id])
-    if link && link.user_id == current_user.id
-      link.update_attribute(:expiration, Date.today - 1)
+    if link && link.user == current_user ||
+       current_user.position == Position.find_by(name: 'Secretary')
+      link.update(expiration: Date.today - 1)
     end
     redirect_to links_path
   end
@@ -38,6 +38,6 @@ class LinksController < ApplicationController
   private
 
   def link_params
-    params.require(:link).permit(:name, :url, :expiration)
+    params.require(:link).permit(:name, :url, :expiration, :user_id)
   end
 end
