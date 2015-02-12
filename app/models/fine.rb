@@ -5,11 +5,12 @@ class Fine < ActiveRecord::Base
 
   # Scopes #####################################################################
 
+  scope :unpaid, -> { where(paid: false) }
+
   # Associations ###############################################################
 
   belongs_to :user
-  has_one :attendance
-  has_one :event, through: :attendance
+  belongs_to :attendance
 
   # Helpers ####################################################################
 end
