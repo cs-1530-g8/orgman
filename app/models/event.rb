@@ -12,14 +12,15 @@ class Event < ActiveRecord::Base
 
   # Scopes #####################################################################
 
-  scope :excusable, -> { where(self_submit_excuse: true) }
+  scope :excusable, -> { where("self_submit_excuse = :value AND date > :today",
+                               today: Date.today, value: true) }
 
   # Associations ###############################################################
 
   has_many :attendances
   has_many :users, through: :attendances
   has_many :fines, through: :attendances
-  has_many :excuses
+  has_many :excuses, through: :attendances
   belongs_to :event_type
 
   # Helpers ####################################################################
