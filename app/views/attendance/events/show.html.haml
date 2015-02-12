@@ -1,7 +1,7 @@
 -provide(:title, @event.name)
 %h1 #{@event.name}
 %p Date: #{format_date(@event.date)}
-%p Fine: #{@event.fine}
+%p Fine: $#{@event.fine}
 %p Event Type: #{@event.event_type.name}
 %p #{@event.format_self_submit_attendance(current_user)}
 %p Semester: #{format_semester(@event.semester)}
