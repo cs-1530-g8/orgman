@@ -1,6 +1,4 @@
 class Event < ActiveRecord::Base
-  before_save { self.name = name.titleize }
-
   # Constants ##################################################################
 
   # Validations ################################################################
@@ -9,6 +7,10 @@ class Event < ActiveRecord::Base
   validates :semester, presence: true
   validates :event_type_id, presence: true
   validates :date, presence: true
+
+  # Callbacks ##################################################################
+
+  before_save { self.name = name.titleize }
 
   # Scopes #####################################################################
 
@@ -30,5 +32,13 @@ class Event < ActiveRecord::Base
 
   def absent_users
     self.attendances.where(present: false).collect(&:user)
+  end
+
+  # Search #####################################################################
+
+  def self.find_fineable_event_ids
+    Event.where("date < :today", today: DateTime.today).
+          where.not(fine: nil).
+          pluck(:id)
   end
 end

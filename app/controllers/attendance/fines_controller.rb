@@ -8,7 +8,7 @@ class Attendance::FinesController < ApplicationController
   end
 
   def outstanding_fines
-    @fines = Fine.where(paid: false).decorate
+    @fines = Fine.unpaid.decorate
   end
 
   def update
@@ -19,21 +19,8 @@ class Attendance::FinesController < ApplicationController
   end
 
   def update_fines
-    Event.all.each do |event|
-      if event.date < DateTime.now && event.fine.present?
-        event.attendances.each do |attendance|
-          if attendance.fine.nil? && attendance.excused != true &&
-            attendance.present != true
-            fine = Fine.new
-            fine.user_id = attendance.user_id
-            fine.attendance_id = attendance.id
-            fine.paid = false
-            fine.save
-            attendance.update(fine_id: fine.id)
-          end
-        end
-      end
-    end
+    unfined = Attendance.find_unfined
+    unfined.each { |a| Fine.create(user: a.user, attendance: a, paid: false) }
     head :ok
   end
 
