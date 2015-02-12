@@ -34,8 +34,8 @@ class User < ActiveRecord::Base
 
   has_many :attendances
   has_many :events, through: :attendances
-  has_many :excuses
-  has_many :fines
+  has_many :excuses, through: :attendances
+  has_many :fines, through: :attendances
   has_one :position
   has_many :links
 
