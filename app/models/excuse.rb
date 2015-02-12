@@ -14,9 +14,9 @@ class Excuse < ActiveRecord::Base
 
   # Associations ###############################################################
 
-  belongs_to :user
-  belongs_to :event
-  has_one :attendance
+  has_one :user, through: :attendance
+  has_one :event, through: :attendance
+  belongs_to :attendance
 
   # Helpers ####################################################################
 end
