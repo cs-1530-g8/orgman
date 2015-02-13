@@ -48,13 +48,13 @@ Rails.application.routes.draw do
   get  'outstanding_fines' => 'attendance/fines#outstanding_fines', as: :outstanding_fines
   get  'update_fines'      => 'attendance/fines#update_fines',      as: :update_fines
   get  'pending_excuses'   => 'attendance/excuses#pending_excuses', as: :pending_excuses
+  get  'excuses'           => 'attendance/excuses#index',           as: :excuses
   post 'process_excuse'    => 'attendance/excuses#process_excuse',  as: :process_excuse
+  post 'submit_excuse'     => 'attendance/excuses#submit_excuse',   as: :submit_excuse
 
   resources :events, controller: 'attendance/events'
   resources :fines, controller: 'attendance/fines', only: [:index, :update]
   resources :attendances, controller: 'attendance/attendances', only: [:update]
   resources :event_types, controller: 'attendance/event_types', except: [:show]
-  resources :excuses, controller: 'attendance/excuses', only: [:index, :create,
-                                                                :destroy]
 
 end

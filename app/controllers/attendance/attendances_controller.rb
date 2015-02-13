@@ -16,5 +16,4 @@ class Attendance::AttendancesController < ApplicationController
   def attendance_params
     params.require(:attendance).permit(:present)
   end
-
 end
