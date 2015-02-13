@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150130201130) do
+ActiveRecord::Schema.define(version: 20150212210740) do
 
   create_table "attendances", force: true do |t|
     t.integer  "user_id"
@@ -20,8 +20,7 @@ ActiveRecord::Schema.define(version: 20150130201130) do
     t.boolean  "excused"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "excuse_id"
-    t.integer  "fine_id"
+    t.string   "excuse_reason"
   end
 
   create_table "event_types", force: true do |t|
@@ -44,20 +43,9 @@ ActiveRecord::Schema.define(version: 20150130201130) do
     t.datetime "updated_at"
   end
 
-  create_table "excuses", force: true do |t|
-    t.integer  "event_id"
-    t.integer  "user_id"
-    t.string   "reason"
-    t.boolean  "accepted"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "attendance_id"
-  end
-
   create_table "fines", force: true do |t|
-    t.integer  "user_id"
     t.integer  "attendance_id"
-    t.boolean  "paid"
+    t.boolean  "paid",          default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

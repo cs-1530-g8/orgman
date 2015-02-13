@@ -1,16 +1,16 @@
 .col-md-8
-  =form_for(@excuse, html: { class: 'form-horizontal' }) do |f|
+  =form_for(:attendance, url: submit_excuse_path, html: { class: 'form-horizontal' }) do |f|
     .form-group
       .col-sm-2
-        = f.label :excuse, 'Event:'
+        = f.label :id, 'Event:'
       .col-sm-10
-        = f.collection_select :event_id, Event.excusable.decorate, :id, :name_and_date, class: 'form-control'
+        = f.collection_select :id, @possible_excuses, :id, :name_and_date, class: 'form-control'
 
     .form-group
       .col-sm-2
-        = f.label :reason, 'Reason for requesting excuse:'
+        = f.label :excuse_reason, 'Reason for requesting excuse:'
       .col-sm-10
-        = f.text_area :reason, class: 'form-control', width: '30%', placeholder: 'Limit to 150 characters.'
+        = f.text_area :excuse_reason, class: 'form-control', width: '30%', placeholder: 'Limit to 150 characters.'
 
     .form-group
       = f.submit 'Submit Excuse', class: 'btn btn-success'

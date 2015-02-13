@@ -5,6 +5,8 @@ class Fine < ActiveRecord::Base
 
   # Scopes #####################################################################
 
+  scope :unpaid, -> { where(paid: false) }
+
   # Associations ###############################################################
 
   belongs_to :attendance
