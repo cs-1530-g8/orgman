@@ -5,7 +5,7 @@ class Attendance::ExcusesController < ApplicationController
 
   def index
     @excuses = Attendance.find_existing_excuses(current_user).decorate
-    @possible_excuses = Attendance.fine_possible_excuses(current_user).decorate
+    @possible_excuses = Attendance.find_possible_excuses(current_user).decorate
   end
 
   def submit_excuse
