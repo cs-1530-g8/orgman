@@ -18,17 +18,17 @@ class Attendance < ActiveRecord::Base
 
   # Search ####################################################################
 
-  def find_existing_excuses(user)
+  def self.find_existing_excuses(user)
     Attendance.where(user_id: user.id).where.not(excuse_reason: nil)
   end
 
-  def find_possible_excuses(user)
+  def self.find_possible_excuses(user)
     Attendance.where(excuse_reason: nil,
                      user_id:       user.id,
                      event_id:      Event.find_fineable_event_ids)
   end
 
-  def find_unfined
+  def self.find_unfined
     Attendance.where(fine:    nil,
                      excused: false,
                      present: false,
