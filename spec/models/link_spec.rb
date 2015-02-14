@@ -11,5 +11,5 @@ describe Link do
 
   before { @link = Link.new(name: 'Sign Up') }
 
-  it { should be_valid }
+  it { should_not be_valid }
 end

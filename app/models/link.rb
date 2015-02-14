@@ -4,6 +4,8 @@ class Link < ActiveRecord::Base
   # Validations ################################################################
 
   validates :user_id, presence: true
+  validates :url, presence: true
+  validates :name, presence: true
 
   # Scopes #####################################################################
 
