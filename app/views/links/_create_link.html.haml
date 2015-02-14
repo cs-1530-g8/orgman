@@ -16,5 +16,6 @@
       = f.label :expiration, 'Expiration Date', class: 'col-md-2'
       .col-sm-10
         = f.date_field :expiration, placeholder: '12/03/2020', class: 'form-control'
+    = f.hidden_field :user_id, value: current_user.id
 
     = f.submit class: 'btn btn-primary'

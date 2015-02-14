@@ -5,13 +5,33 @@ class Attendance < ActiveRecord::Base
 
   # Scopes #####################################################################
 
+  scope :pending_excuses, -> { where(excused: nil).
+                               where.not(excuse_reason: nil) }
+
   # Associations ###############################################################
 
   has_one :fine
-  has_one :excuse
   belongs_to :event
   belongs_to :user
 
   # Helpers ####################################################################
 
+  # Search ####################################################################
+
+  def find_existing_excuses(user)
+    Attendance.where(user_id: user.id).where.not(excuse_reason: nil)
+  end
+
+  def find_possible_excuses(user)
+    Attendance.where(excuse_reason: nil,
+                     user_id:       user.id,
+                     event_id:      Event.find_fineable_event_ids)
+  end
+
+  def find_unfined
+    Attendance.where(fine:    nil,
+                     excused: false,
+                     present: false,
+                     event:   Event.fine_fineable_event_ids)
+  end
 end
