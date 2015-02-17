@@ -32,6 +32,6 @@ class Attendance < ActiveRecord::Base
     Attendance.where(fine:    nil,
                      excused: false,
                      present: false,
-                     event:   Event.fine_fineable_event_ids)
+                     event:   Event.find_fineable_event_ids)
   end
 end
