@@ -57,4 +57,6 @@ Rails.application.routes.draw do
   resources :attendances, controller: 'attendance/attendances', only: [:update]
   resources :event_types, controller: 'attendance/event_types', except: [:show]
 
+  resources :org_chart, controller: 'org_chart'
+
 end
