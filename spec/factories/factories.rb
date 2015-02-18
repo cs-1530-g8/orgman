@@ -84,4 +84,10 @@ FactoryGirl.define do
       paid false
     end
   end
+
+  factory :position do
+    sequence(:name) { |n| "position#{n}" }
+    user
+    event_type
+  end
 end
