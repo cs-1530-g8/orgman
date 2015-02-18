@@ -17,13 +17,25 @@ FactoryGirl.define do
   end
 
   factory :link do
-    sequence(:name)      { |n| "link#{n}" }
+    sequence(:name) { |n| "link#{n}" }
     url 'example.com'
     expiration { DateTime.tomorrow }
     user
 
     trait :expired do
       expiration { DateTime.yesterday }
+    end
+  end
+
+  factory :event_type do
+    sequence(:name) { |n| "event_type#{n}" }
+
+    trait :require_points do
+      points_required 2
+    end
+
+    trait :required_percentage_attendance do
+      percentage_attendance_required 90
     end
   end
 end
