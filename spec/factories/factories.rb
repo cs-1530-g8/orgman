@@ -34,8 +34,27 @@ FactoryGirl.define do
       points_required 2
     end
 
-    trait :required_percentage_attendance do
+    trait :require_percentage_attendance do
       percentage_attendance_required 90
+    end
+  end
+
+  factory :event do
+    sequence(:name) { |n| "link#{n}" }
+    date { DateTime.yesterday }
+    semester 8
+    event_type
+
+    trait :with_fine do
+      fine 50
+    end
+
+    trait :allow_self_submit_attendance do
+      self_submit_attendance true
+    end
+
+    trait :allow_self_submit_excuse do
+      self_submit_excuse true
     end
   end
 end
