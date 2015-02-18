@@ -42,8 +42,11 @@ group :test do
   gem 'selenium-webdriver'
   gem 'capybara'
   gem 'capybara-webkit'
-  gem 'factory_girl_rails'
   gem 'database_cleaner'
+end
+
+group :development, :test do
+  gem 'factory_girl_rails'
 end
 
 group :production do
