@@ -57,4 +57,22 @@ FactoryGirl.define do
       self_submit_excuse true
     end
   end
+
+  factory :attendances do
+    user
+    event
+    present true
+
+    trait :absent do
+      present false
+    end
+
+    trait :unexcused do
+      excused false
+    end
+
+    trait :excuse_accepted do
+      excused true
+    end
+  end
 end
