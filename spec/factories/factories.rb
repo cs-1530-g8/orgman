@@ -4,7 +4,7 @@ FactoryGirl.define do
     sequence(:last_name)  { |n| "LastName#{n}" }
     sequence(:email)      { |n| "email-#{n}@example.com" }
     confirmed_at { Time.now }
-    password 'password'
+    password "password"
     approved true
 
     trait :unconfirmed do
@@ -18,7 +18,7 @@ FactoryGirl.define do
 
   factory :link do
     sequence(:name) { |n| "link#{n}" }
-    url 'example.com'
+    url "example.com"
     expiration { DateTime.tomorrow }
     user
 
@@ -41,8 +41,8 @@ FactoryGirl.define do
 
   factory :event do
     sequence(:name) { |n| "link#{n}" }
-    date { DateTime.yesterday }
-    semester 20151
+    date            { DateTime.yesterday }
+    semester        { "#{DateTime.now.year}1" }
     event_type
 
     trait :with_fine do
