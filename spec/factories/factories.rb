@@ -42,7 +42,7 @@ FactoryGirl.define do
   factory :event do
     sequence(:name) { |n| "link#{n}" }
     date { DateTime.yesterday }
-    semester 8
+    semester 20151
     event_type
 
     trait :with_fine do
@@ -58,7 +58,7 @@ FactoryGirl.define do
     end
   end
 
-  factory :attendances do
+  factory :attendance do
     user
     event
     present true
@@ -73,6 +73,15 @@ FactoryGirl.define do
 
     trait :excuse_accepted do
       excused true
+    end
+  end
+
+  factory :fine do
+    attendance
+    paid true
+
+    trait :unpaid do
+      paid false
     end
   end
 end
