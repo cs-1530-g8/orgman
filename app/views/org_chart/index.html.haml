@@ -1,1 +1,3 @@
-= render partial: 'chart', collection: @charts, as: :chart
+= @charts.each_with_index do |c, i|
+  %div{id: "chart_#{i}" }
+    = render_chart(c, "chart_#{i}")
