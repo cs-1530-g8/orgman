@@ -1,5 +1,6 @@
 class OrgChartController < ApplicationController
-  before_action -> { user_has_position("Secretary") }
+  before_action -> { user_has_position("Secretary") }, only: [:create, :destroy]
+  before_action :authenticate_user!
 
   def index
     @charts = []
@@ -35,13 +36,15 @@ class OrgChartController < ApplicationController
 
   private
 
+  def user_params
+    params.require(:user).permit(:id, :division, :extra_info, :parent_id)
+  end
+
   def get_array_for_division(division)
     users = User.where(division: division)
     user_array = []
     users.each do |user|
-      user_array.push([{v: user.id, f: "#{user.name}<div style='color:red;
-                                         font-style: italic'>#{user.extra_info}
-                                         </div>"}, user.parent_id.to_s, ''])
+      user_array.push([{v: "#{user.id}", f: "#{user.name}<div style='color:red;font-style: italic'>#{user.extra_info} </div>"}, user.parent_id.to_s, ''])
     end
     user_array
   end
