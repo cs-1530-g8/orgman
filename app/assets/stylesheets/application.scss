@@ -24,11 +24,11 @@
 
 /* Base styles (regardless of theme) */
 .bs-callout {
-  padding: 20px;
-  margin: 20px 0;
   border: 1px solid #eee;
   border-left-width: 5px;
   border-radius: 3px;
+  margin: 20px 0;
+  padding: 20px;
 }
 
 .bs-callout h1,
@@ -46,7 +46,7 @@
 .bs-callout-danger h4,
 .bs-callout-danger h5,
 .bs-callout-danger h6 {
-  color: #B94A48;
+  color: #b94a48;
 }
 
 .bs-callout-warning h1,
@@ -55,7 +55,7 @@
 .bs-callout-warning h4,
 .bs-callout-warning h5,
 .bs-callout-warning h6 {
-  color: #C09853;
+  color: #c09853;
 }
 
 .bs-callout-info h1,
@@ -64,7 +64,7 @@
 .bs-callout-info h4,
 .bs-callout-info h5,
 .bs-callout-info h6 {
-  color: #3A87AD;
+  color: #3a87ad;
 }
 
 .bs-callout-success h1,
@@ -73,7 +73,7 @@
 .bs-callout-success h4,
 .bs-callout-success h5,
 .bs-callout-success h6 {
-  color: #3C763D;
+  color: #3c763d;
 }
 
 .bs-callout p:last-child {
@@ -87,11 +87,11 @@
 
 /* Themes for different contexts */
 .bs-callout-danger {
-  border-left-color: #dFb5b4;
+  border-left-color: #dfb5b4;
 }
 
 .bs-callout-warning {
-  border-left-color: #C09853;
+  border-left-color: #c09853;
 }
 
 .bs-callout-info {
