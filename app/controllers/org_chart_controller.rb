@@ -28,9 +28,10 @@ class OrgChartController < ApplicationController
                                                params[:user][:division] :
                                                params[:user][:existing_division]
     if user
-      User.update(user_params)
+      user.update(user_params)
     else
       user = User.new(user_params_with_name)
+      user.status = 'org_chart_dummy'
       user.email = ('a'..'z').to_a.shuffle[0,15].join
       user.save(validate: false)
     end
@@ -39,7 +40,7 @@ class OrgChartController < ApplicationController
 
   def remove
     user = User.find(params[:user][:id])
-    if !user.approved
+    if user.status == 'org_chart_dummy'
       user.destroy
     else
       user.save(division: nil, parent_id: nil, extra_info: nil, validate: false)

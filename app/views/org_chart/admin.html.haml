@@ -7,8 +7,8 @@
     .col-sm-2
       = f.label :existing_id, 'Add an existing User:'
     .col-sm-10
-      = f.collection_select :existing_id, User.where(division: nil), :id, :name,
-                            { include_blank: true }, { class: 'select2' }
+      = f.collection_select :existing_id, User.unassigned_to_org_chart, :id,
+                            :name, { include_blank: true }, { class: 'select2' }
 
   .form-group
     .col-sm-2
@@ -32,7 +32,7 @@
     .col-sm-2
       = f.label :parent_id, "Pick the user's parent:"
     .col-sm-2
-      = f.collection_select :parent_id, User.where.not(division: nil), :id, :name,
+      = f.collection_select :parent_id, User.not_pending, :id, :name,
                       { include_blank: true }, { class: 'select2' }
 
   .form-group
@@ -52,7 +52,7 @@
     .col-sm-2
       = f.label :id, 'User:'
     .col-sm-2
-      = f.collection_select :id, User.where.not(division: nil), :id, :name,
+      = f.collection_select :id, User.not_pending, :id, :name,
                             { }, { class: 'select2' }
   .form-group
     .col-sm-12
