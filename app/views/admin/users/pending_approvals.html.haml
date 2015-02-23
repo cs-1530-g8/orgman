@@ -1,9 +1,8 @@
 %h1 Users Awaiting Approval
-.bs-callout
-  .bs-callout-danger
-    %h4 Caution when approving a user
-    %p Carefully verify each user's data before approving them. It is your job to make sure their data is accurate and complete.
-    %p If you approve someone as the wrong status just change it on the #{link_to "\"Update Users\"", update_users_path} page
+.bs-callout.bs-callout-warning
+  %h4 Caution when approving a user
+  %p Carefully verify each user's data before approving them. It is your job to make sure their data is accurate and complete.
+  %p If you approve someone as the wrong status just change it on the #{link_to "\"Update Users\"", update_users_path} page
 
 - @users.each do |u|
   %h4= u.name

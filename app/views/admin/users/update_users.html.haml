@@ -9,10 +9,9 @@
   .row
     %hr
     %h1 Update User Positions
-    .bs-callout
-      .bs-callout-warning
-        %h4 Users may only hold one position
-        %p Users may only hold one position at a time. If you need additional functionality please contact your administrator.
+    .bs-callout.bs-callout-warning
+      %h4 Users may only hold one position
+      %p Users may only hold one position at a time. If you need additional functionality please contact your administrator.
     = render partial: 'admin/users/position_update', collection: @execs, as: :position
     %h4 Add a new position
     = render partial: 'admin/users/position_update', locals: { position: @new_position }
@@ -21,9 +20,8 @@
   .row
     %hr
     %h1 Update Event Type Admin(s)
-    .bs-callout
-      .bs-callout-warning
-        %h4 Users may only administrate one event type at a time
-        %p These positions correlate to event types. A user may be assigned to manage a specific event type.
-        %p Leave the user blank if you want to be the sole administrator of an event type.
+    .bs-callout.bs-callout-warning
+      %h4 Users may only administrate one event type at a time
+      %p These positions correlate to event types. A user may be assigned to manage a specific event type.
+      %p Leave the user blank if you want to be the sole administrator of an event type.
     = render partial: 'admin/users/position_update', collection: @event_type_admins, as: :position
