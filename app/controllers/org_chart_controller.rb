@@ -7,9 +7,9 @@ class OrgChartController < ApplicationController
     division_names = User.uniq.pluck(:division).reject(&:nil?)
     division_names.each do |name|
       data_table = GoogleVisualr::DataTable.new
-      data_table.new_column('string', 'Name'   )
-      data_table.new_column('string', 'Manager')
-      data_table.new_column('string', 'ToolTip')
+      data_table.new_column("string", "Name")
+      data_table.new_column("string", "Manager")
+      data_table.new_column("string", "ToolTip")
       data_table.add_rows(get_array_for_division(name))
       options = { allowHtml: true }
 
@@ -24,15 +24,16 @@ class OrgChartController < ApplicationController
 
   def create
     user = User.find_by(id: params[:user][:existing_id])
-    params[:user][:division] = params[:user][:division].present? ?
-                                               params[:user][:division] :
-                                               params[:user][:existing_division]
+    if params[:user][:division].blank?
+      params[:user][:division] = params[:user][:existing_division]
+    end
+
     if user
       user.update(user_params)
     else
       user = User.new(user_params_with_name)
-      user.status = 'org_chart_dummy'
-      user.email = ('a'..'z').to_a.shuffle[0,15].join
+      user.status = "org_chart_dummy"
+      user.email = ("a".."z").to_a.shuffle[0, 15].join
       user.save(validate: false)
     end
     redirect_to org_chart_admin_path
@@ -40,7 +41,7 @@ class OrgChartController < ApplicationController
 
   def remove
     user = User.find(params[:user][:id])
-    if user.status == 'org_chart_dummy'
+    if user.status == "org_chart_dummy"
       user.destroy
     else
       user.save(division: nil, parent_id: nil, extra_info: nil, validate: false)
@@ -62,7 +63,9 @@ class OrgChartController < ApplicationController
     users = User.where(division: division)
     user_array = []
     users.each do |user|
-      user_array.push([{v: "#{user.id}", f: "#{user.name}<div style='color:red;font-style: italic'>#{user.extra_info} </div>"}, user.parent_id.to_s, ''])
+      user_array.push([ {v: "#{user.id}", f: "#{user.name}" +
+                         "<div style='color:red;font-style: italic'>" +
+                         "#{user.extra_info}</div>" }, user.parent_id.to_s, ""])
     end
     user_array
   end
