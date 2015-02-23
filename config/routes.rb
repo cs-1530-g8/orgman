@@ -57,6 +57,10 @@ Rails.application.routes.draw do
   resources :attendances, controller: 'attendance/attendances', only: [:update]
   resources :event_types, controller: 'attendance/event_types', except: [:show]
 
-  resources :org_chart, controller: 'org_chart'
+  #### Org Chart ###############################################################
+  resources :org_chart, controller: 'org_chart', only: [:index]
+  get 'org_chart_admin' => 'org_chart#admin', as: 'org_chart_admin'
+  post 'org_chart_create' => 'org_chart#create', as: 'org_chart_create'
+  post 'org_chart_remove' => 'org_chart#remove', as: 'org_chart_remove'
 
 end

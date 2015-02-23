@@ -18,7 +18,11 @@
 
 var ready;
 ready = function() {
-  $(".select2").select2();
+  $(".select2").select2({
+    placeholder: 'Make a Selection',
+    allowClear: true,
+    dropDownAutoWitdh: true
+  });
 };
 
 $(document).ready(ready);
