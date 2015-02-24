@@ -1,3 +1,4 @@
+- provide(:title, "Organization Chart")
 - @charts.each_with_index do |c, i|
   %div{id: "chart_#{i}" }
   = render_chart(c, "chart_#{i}")
