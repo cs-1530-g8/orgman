@@ -63,7 +63,7 @@ class OrgChartController < ApplicationController
     users = User.where(division: division)
     user_array = []
     users.each do |user|
-      user_array.push([ {v: "#{user.id}", f: "#{user.name}" +
+      user_array.push([{ v: "#{user.id}", f: "#{user.name}" +
                          "<div style='color:red;font-style: italic'>" +
                          "#{user.extra_info}</div>" }, user.parent_id.to_s, ""])
     end

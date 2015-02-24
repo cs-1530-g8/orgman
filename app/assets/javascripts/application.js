@@ -16,8 +16,7 @@
 //= require_tree .
 //= require select2
 
-var ready;
-ready = function() {
+var select2Init = function() {
   $('.select2').select2({
     placeholder: 'Make a Selection',
     allowClear: true,
@@ -25,5 +24,5 @@ ready = function() {
   });
 };
 
-$(document).ready(ready);
-$(document).on('page:load', ready);
+$(document).ready(select2Init);
+$(document).on('page:load', select2Init);
