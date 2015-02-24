@@ -1,0 +1,59 @@
+%h2.text-center Organization Chart Administration
+%hr
+%h4 Add a user to the chart
+= form_for :user, url: org_chart_create_path, html: { class: 'form-horizontal' } do |f|
+
+  .form-group
+    .col-sm-2
+      = f.label :existing_id, 'Add an existing User:'
+    .col-sm-10
+      = f.collection_select :existing_id, User.unassigned_to_org_chart, :id,
+                            :name, { include_blank: true }, { class: 'select2' }
+
+  .form-group
+    .col-sm-2
+      = f.label :first_name, 'Add an unregistered user:'
+    .col-sm-10
+      = f.text_field :first_name, placeholder: "User's name"
+
+  .form-group
+    .col-sm-2
+      = f.label :division, 'Add as part of a new division:'
+    .col-sm-10
+      = f.text_field :division, placeholder: "New Division"
+
+  .form-group
+    .col-sm-2
+      = f.label :existing_division, 'Pick an existing division:'
+    .col-sm-10
+      = f.select :existing_division, options_for_select(@divisions)
+
+  .form-group
+    .col-sm-2
+      = f.label :parent_id, "Pick the user's parent:"
+    .col-sm-2
+      = f.collection_select :parent_id, User.not_pending, :id, :name,
+                      { include_blank: true }, { class: 'select2' }
+
+  .form-group
+    .col-sm-2
+      = f.label :extra_info
+    .col-sm-10
+      = f.text_field :extra_info, placeholder: 'limit to 15 characters'
+
+  .form-group
+    .col-sm-12
+      = f.submit 'Add User', class: 'btn btn-success'
+
+%hr
+%h4 Remove a user from the chart
+= form_for :user, url: org_chart_remove_path, html: { class: 'form-horizontal' } do |f|
+  .form-group
+    .col-sm-2
+      = f.label :id, 'User:'
+    .col-sm-2
+      = f.collection_select :id, User.not_pending, :id, :name,
+                            { }, { class: 'select2' }
+  .form-group
+    .col-sm-12
+      = f.submit 'Remove User', class: 'btn btn-danger'

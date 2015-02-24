@@ -6,7 +6,7 @@ class Admin::UsersController < ApplicationController
   #### Pending Approvals #######################################################
 
   def pending_approvals
-    @users = User.where(approved: false)
+    @users = User.pending
   end
 
   def approve_user

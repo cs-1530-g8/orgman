@@ -24,14 +24,14 @@ class Attendance < ActiveRecord::Base
 
   def self.find_possible_excuses(user)
     Attendance.where(excuse_reason: nil,
-                     user_id:       user.id,
-                     event_id:      Event.find_fineable_event_ids)
+                     user_id: user.id,
+                     event_id: Event.find_fineable_event_ids)
   end
 
   def self.find_unfined
-    Attendance.where(fine:    nil,
+    Attendance.where(fine: nil,
                      excused: false,
                      present: false,
-                     event:   Event.fine_fineable_event_ids)
+                     event: Event.find_fineable_event_ids)
   end
 end

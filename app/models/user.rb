@@ -21,22 +21,35 @@ class User < ActiveRecord::Base
 
   # Scopes #####################################################################
 
-  scope :active,   -> { where("status = 'active'").
-                        sort_by { |u| [u.last_name, u.first_name] } }
-  scope :alumni,   -> { where("status = 'alumni'").
-                        sort_by { |u| [u.last_name, u.first_name] } }
-  scope :pending,  -> { where("status = 'pending'").
-                        sort_by { |u| [u.last_name, u.first_name] } }
-  scope :inactive, -> { where("status = 'inactive'").
-                        sort_by { |u| [u.last_name, u.first_name] } }
+  scope :active, -> {
+    where("status = 'active'").sort_by { |u| [u.last_name, u.first_name] }
+  }
+  scope :alumni, -> {
+    where("status = 'alumni'").sort_by { |u| [u.last_name, u.first_name] }
+  }
+  scope :pending, -> {
+    where("status = 'pending'").sort_by { |u| [u.last_name, u.first_name] }
+  }
+  scope :inactive, -> {
+    where("status = 'inactive'").sort_by { |u| [u.last_name, u.first_name] }
+  }
+  scope :not_pending, -> {
+    where.not("status = 'pending'")
+  }
+  scope :org_chart_dummy, -> {
+    where("status = 'org_chart_dummy'")
+  }
+  scope :unassigned_to_org_chart, -> {
+    where.not(status: 'pending').where(division: nil)
+  }
 
   # Associations ###############################################################
 
   has_many :attendances
   has_many :events, through: :attendances
   has_many :fines, through: :attendances
-  has_one :position
   has_many :links
+  has_one :position
 
   # Helpers ####################################################################
 

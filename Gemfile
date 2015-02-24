@@ -8,6 +8,7 @@ gem 'draper', '~>1.3'
 gem 'paperclip'
 gem 'rubocop', require: false
 gem 'bitly'
+gem 'google_visualr', '~> 2.4.0'
 
 # Authentication
 gem 'devise'
