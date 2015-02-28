@@ -9,7 +9,7 @@ class Attendance::EventsController < ApplicationController
 
   # todo only events from current semester
   def index
-    @events = Event.all.decorate
+    @events = EventDecorator.decorate_collection(Event.all.sort_by(&:date))
   end
 
   def show
