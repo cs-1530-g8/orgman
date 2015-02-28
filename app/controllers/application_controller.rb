@@ -31,4 +31,11 @@ class ApplicationController < ActionController::Base
     event = Event.find(event_id)
     can_edit_event_type(event.event_type.id)
   end
+
+  def can_create_events
+    if current_user.position == nil
+      flash[:alert] = 'You must be a chairman or the secretary to add an event'
+      redirect_to events_path
+    end
+  end
 end

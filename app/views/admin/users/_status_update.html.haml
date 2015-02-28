@@ -1,7 +1,7 @@
-= form_tag update_status_path, class: 'form-inline'  do
+= form_tag update_status_path  do
   = hidden_field_tag 'status', status
   .form-group
     = label :users_to_update, title
-    = select_tag :users_to_update, options_from_collection_for_select(users, "id", "name"), multiple: true
+    = select_tag :users_to_update, options_from_collection_for_select(users, "id", "name"), multiple: true, class: 'form-control select2', style: 'width: 75%'
   .form-group
-    = submit_tag 'Update', class: 'btn btn-success form-control'
+    = submit_tag 'Update', style: "width: 20%", class: 'btn btn-success form-control'

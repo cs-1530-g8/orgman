@@ -2,6 +2,7 @@ class Attendance::EventsController < ApplicationController
   include EventsHelper
 
   before_action :authenticate_user!
+  before_action -> { can_create_events }, only: [:new]
   before_action -> { can_edit_event(params[:id]) }, only: [:edit, :update]
   before_action -> { can_edit_event_type(params[:event][:event_type_id]) },
                 only: [:create]
@@ -13,39 +14,31 @@ class Attendance::EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id]).decorate
-    @attended_users = @event.attended_users.sort_by {
-      |u| [u.last_name, u.first_name]
-    }
-    @absent_users = @event.absent_users.sort_by {
-      |u| [u.last_name, u.first_name]
-    }
+    @attended = @event.attended_users
+    @absent = @event.absent_users
+    @unexcused_and_absent = @event.absent_users
   end
 
   def new
-    if current_user.position.blank?
-      flash[:alert] = 'You must be a chairman or the secretary to add an event'
-      redirect_to events_path
-    end
     @event = Event.new.decorate
   end
 
   def create
     @event = Event.new(event_params)
-    @event.semester = current_semester(Time.now.year)
 
     if @event.save
       user_ids = params[:event][:attendances][:user_ids].reject { |s| s.blank? }
       absent = User.active - User.find(user_ids)
 
       user_ids.each do |user_id|
-        Attendance.create(user_id: user_id, event_id: @event.id, present: true)
+        Attendance.create(user_id: user_id, event: @event, present: true)
       end
 
       absent.each do |user|
-        Attendance.create(user: user, event_id: @event.id, present: false)
+        Attendance.create(user: user, event: @event)
       end
 
-      flash[:notice] = "#{@event.name} on #{format_date @event.date} created
+      flash[:notice] = "#{@event.name} on #{format_date(@event.date)} created
                            successfully."
     end
 

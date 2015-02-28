@@ -14,6 +14,7 @@
       %h4 Users may only hold one position
       %p Users may only hold one position at a time. If you need additional functionality please contact your administrator.
     = render partial: 'admin/users/position_update', collection: @execs, as: :position
+    %hr
     %h4 Add a new position
     = render partial: 'admin/users/position_update', locals: { position: @new_position }
 

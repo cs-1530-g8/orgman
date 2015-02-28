@@ -5,8 +5,9 @@ class Attendance < ActiveRecord::Base
 
   # Scopes #####################################################################
 
-  scope :pending_excuses, -> { where(excused: nil).
-                               where.not(excuse_reason: nil) }
+  scope :pending_excuses, -> {
+    where(excused: nil).where.not(excuse_reason: nil)
+  }
 
   # Associations ###############################################################
 
@@ -25,13 +26,13 @@ class Attendance < ActiveRecord::Base
   def self.find_possible_excuses(user)
     Attendance.where(excuse_reason: nil,
                      user_id: user.id,
-                     event_id: Event.find_fineable_event_ids)
+                     event_id: Event.find_excusable_event_ids)
   end
 
   def self.find_unfined
-    Attendance.where(fine: nil,
-                     excused: false,
+    Attendance.where.not(id: Fine.all.pluck(:attendance_id)).
+               where(excused: false,
                      present: false,
-                     event: Event.find_fineable_event_ids)
+                     event_id: Event.find_fineable_event_ids)
   end
 end

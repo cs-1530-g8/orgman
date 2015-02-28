@@ -6,8 +6,13 @@
 %p #{@event.format_self_submit_attendance(current_user)}
 %p Semester: #{format_semester(@event.semester)}
 
-%h3 Present Members
-=render partial: 'attendance/events/event_attendee', collection: @attended_users, as: :user
+.col-sm-3
+  %h3 Present Members
+  =render partial: 'attendance/events/event_attendee', collection: @attended, as: :user
 
-%h3 Absent Members
-=render partial: 'attendance/events/event_attendee', collection: @absent_users, as: :user
+.col-sm-3
+  %h3 Absent Members
+  =render partial: 'attendance/events/event_attendee', collection: @absent, as: :user
+
+.col-sm-3
+  %h3 Excused Members

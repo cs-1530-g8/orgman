@@ -61,6 +61,14 @@ class User < ActiveRecord::Base
     self.attendances.where(present: true).count
   end
 
+  def valid_event_types
+    if position == Position.find_by(name: "Secretary")
+      EventType.all
+    else
+      [position.event_type]
+    end
+  end
+
   # Authentication #############################################################
 
   def active_for_authentication?

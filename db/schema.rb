@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150223184008) do
+ActiveRecord::Schema.define(version: 20150226202308) do
 
   create_table "attendances", force: true do |t|
     t.integer  "user_id"
     t.integer  "event_id"
-    t.boolean  "present"
+    t.boolean  "present",       default: false
     t.boolean  "excused"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -35,8 +35,8 @@ ActiveRecord::Schema.define(version: 20150223184008) do
     t.string   "name"
     t.date     "date"
     t.integer  "fine"
-    t.boolean  "self_submit_attendance"
-    t.boolean  "self_submit_excuse"
+    t.boolean  "self_submit_attendance", default: false
+    t.boolean  "self_submit_excuse",     default: false
     t.integer  "semester"
     t.integer  "event_type_id"
     t.datetime "created_at"

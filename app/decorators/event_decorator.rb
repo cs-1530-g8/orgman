@@ -3,15 +3,6 @@ class EventDecorator < Draper::Decorator
 
   delegate_all
 
-  # Define presentation-specific methods here. Helpers are accessed through
-  # `helpers` (aka `h`). You can override attributes, for example:
-  #
-  #   def created_at
-  #     helpers.content_tag :span, class: 'time' do
-  #       object.created_at.strftime("%a %m/%d/%y")
-  #     end
-  #   end
-
   def format_self_submit_attendance(user)
     if object.self_submit_attendance
       attendance = Attendance.where(user_id: user.id, event_id: object.id)
@@ -25,15 +16,6 @@ class EventDecorator < Draper::Decorator
       end
     else
       'You may not submit your own attendance for this event.'
-    end
-  end
-
-  def valid_event_types(member)
-    position = member.position
-    if position == Position.find_by(name: 'Secretary')
-      EventType.all
-    else
-      position.event_type
     end
   end
 
