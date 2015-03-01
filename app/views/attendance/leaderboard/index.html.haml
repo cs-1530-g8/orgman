@@ -6,5 +6,5 @@
   %th Total
   - EventType.required.each do |type|
     %th #{type.name}
-  %th Other
+  %th All Other Types
   = render partial: 'attendance/leaderboard/user_point_detail', collection: @users, as: :user
