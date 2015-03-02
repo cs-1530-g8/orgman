@@ -50,11 +50,11 @@ class Event < ActiveRecord::Base
 
   def self.find_excusable_event_ids
     Event.where("date > :today", today: Date.today).
-          where(self_submit_excuse: true).pluck(:id)
+      where(self_submit_excuse: true).pluck(:id)
   end
 
   def self.find_fineable_event_ids
     Event.where("date < :today", today: Date.today).
-          where.not(fine: nil).pluck(:id)
+      where.not(fine: nil).pluck(:id)
   end
 end

@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
 
   def can_create_events
     if current_user.position == nil
-      flash[:alert] = 'You must be a chairman or the secretary to add an event'
+      flash[:alert] = "You must be a chairman or the secretary to add an event"
       redirect_to events_path
     end
   end
