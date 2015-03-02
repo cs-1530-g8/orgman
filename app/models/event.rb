@@ -19,7 +19,7 @@ class Event < ActiveRecord::Base
 
   scope :excusable, -> {
     where("self_submit_excuse = :value AND date > :today", today: Date.today,
-          value: true)
+                                                           value: true)
   }
 
   # Associations ###############################################################
@@ -32,21 +32,18 @@ class Event < ActiveRecord::Base
   # Helpers ####################################################################
 
   def attended_users
-    self.attendances.where(present: true).collect(&:user).sort_by {
-      |u| [u.last_name, u.first_name]
-    }
+    attendances.where(present: true).map(&:user).
+      sort_by { |u| [u.last_name, u.first_name] }
   end
 
   def absent_users
-    self.attendances.where(present: false).collect(&:user).sort_by {
-      |u| [u.last_name, u.first_name]
-    }
+    attendances.where(present: false).map(&:user).
+      sort_by { |u| [u.last_name, u.first_name] }
   end
 
   def excused_users
-    self.attendances.where(excused: true).collect(&:user).sort_by {
-      |u| [u.last_name, u.first_name]
-    }
+    attendances.where(excused: true).map(&:user).
+      sort_by { |u| [u.last_name, u.first_name] }
   end
 
   # Search #####################################################################
