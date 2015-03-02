@@ -1,5 +1,7 @@
 - provide(:title, "Event Listing")
 %h1 All events
-%ul
-  =render partial: 'attendance/events/event_listing', collection: @events, as: :event
-
+%table.table.table-striped
+  %th Name
+  %th Date
+  %th Type
+  = render partial: 'attendance/events/event_listing', collection: @events, as: :event

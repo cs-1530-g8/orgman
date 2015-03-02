@@ -1,1 +1,4 @@
-%li Name: #{event.format_edit_link(current_user)} Date: #{format_date(event.date)} Type: #{event.event_type.name}
+%tr
+  %td= event.format_edit_link(current_user)
+  %td= format_date(event.date)
+  %td= event.event_type.name

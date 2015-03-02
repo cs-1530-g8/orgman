@@ -24,9 +24,8 @@
     .form-group
       .col-sm-2
         = f.label :event_type_id, 'Event Type:'
-        - valid_event_types = @event.valid_event_types(current_user)
       .col-sm-10
-        = collection_select :event, :event_type_id, valid_event_types, :id, :name
+        = f.collection_select :event_type_id, current_user.valid_event_types, :id, :name
 
     .form-group
       .col-sm-2

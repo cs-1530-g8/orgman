@@ -2,9 +2,12 @@
 .container
   .row
     %h1 Update User Status
-    = render partial: 'admin/users/status_update', locals: { title: 'To Inactive', status: 'inactive', users: User.active + User.alumni }
-    = render partial: 'admin/users/status_update', locals: { title: 'To Alumni', status: 'alumni', users: User.active + User.inactive }
-    = render partial: 'admin/users/status_update', locals: { title: 'To Active', status: 'active', users: User.alumni + User.inactive }
+    .col-md-4
+      = render partial: 'admin/users/status_update', locals: { title: 'To Inactive', status: 'inactive', users: User.active + User.alumni }
+    .col-md-4
+      = render partial: 'admin/users/status_update', locals: { title: 'To Alumni', status: 'alumni', users: User.active + User.inactive }
+    .col-md-4
+      = render partial: 'admin/users/status_update', locals: { title: 'To Active', status: 'active', users: User.alumni + User.inactive }
 
 .container
   .row
@@ -14,6 +17,7 @@
       %h4 Users may only hold one position
       %p Users may only hold one position at a time. If you need additional functionality please contact your administrator.
     = render partial: 'admin/users/position_update', collection: @execs, as: :position
+    %hr
     %h4 Add a new position
     = render partial: 'admin/users/position_update', locals: { position: @new_position }
 

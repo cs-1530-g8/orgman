@@ -28,23 +28,38 @@ class OrgChartController < ApplicationController
       params[:user][:division] = params[:user][:existing_division]
     end
 
+    success = false
     if user
-      user.update(user_params)
+      success = user.update(user_params)
     else
       user = User.new(user_params_with_name)
       user.status = "org_chart_dummy"
       user.email = ("a".."z").to_a.shuffle[0, 15].join
-      user.save(validate: false)
+      success = user.save(validate: false)
+    end
+
+    if success
+      flash[:notice] = "Adding #{user.name} to the chart succeeded."
+    else
+      flash[:alert] = "Adding #{user.name} to the chart failed."
     end
     redirect_to org_chart_admin_path
   end
 
   def remove
     user = User.find(params[:user][:id])
+
+    success = false
     if user.status == "org_chart_dummy"
-      user.destroy
+      success = user.destroy
     else
-      user.save(division: nil, parent_id: nil, extra_info: nil, validate: false)
+      success = user.update(division: nil, parent_id: nil, extra_info: nil)
+    end
+
+    if success
+      flash[:notice] = "Removing #{user.name} from the chart succeeded."
+    else
+      flash[:alert] = "Removing #{user.name} from the chart failed."
     end
     redirect_to org_chart_admin_path
   end

@@ -1,13 +1,11 @@
-.row
-  = form_for position, class: 'form-horizontal' do |f|
-    .form-group.col-sm-2
-      = f.label :name
-      = position.format_name_field
-    .form-group.col-sm-2
-      = f.label :user_id, 'User Holding Position'
-      = f.collection_select :user_id, User.active, :id, :name, prompt: '(choose a leader)'
-    .form-group.col-sm-1
-      = submit_tag position.user_id.nil? ? 'Create' : 'Update', class: 'btn btn-success form-control'
-    .form-group.col-sm-1
-  .col-sm-1
-  = position.render_delete_button
+= form_for position  do |f|
+  .form-group
+    = f.label :name
+    = position.format_name_field
+  .form-group
+    = f.label :user_id, 'User Holding Position'
+    = f.collection_select :user_id, User.active, :id, :name, prompt: '(choose a leader)'
+  .form-group
+    = submit_tag position.user_id.nil? ? 'Create' : 'Update', style: "width: 15%", class: 'btn btn-success form-control'
+  .form-group
+= position.render_delete_button

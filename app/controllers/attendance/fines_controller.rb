@@ -19,9 +19,14 @@ class Attendance::FinesController < ApplicationController
   end
 
   def update_fines
+    created = false
     unfined = Attendance.find_unfined
-    unfined.each { |a| Fine.create(attendance: a) }
-    head :ok
+    unfined.each { |a| created = Fine.create(attendance: a) }
+    if created
+      head :created
+    else
+      head :ok
+    end
   end
 
   private
