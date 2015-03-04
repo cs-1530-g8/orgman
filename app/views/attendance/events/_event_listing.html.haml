@@ -1,4 +1,4 @@
 %tr
-  %td= event.format_edit_link(current_user)
+  %td #{link_to(event.name, event_path(event))} #{event.format_edit_link(current_user)}
   %td= format_date(event.date)
   %td= event.event_type.name
