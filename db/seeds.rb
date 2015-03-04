@@ -23,5 +23,5 @@ Position.create(name: User::PRESIDENT, user: admin)
 Position.create(name: User::TREASURER, user: admin)
 
 # Create the default event type and assign user 2 as it's admin
-event_type = EventType.create(name: 'Miscellaneous')
+event_type = EventType.create(name: "Miscellaneous")
 Position.create(user: standard_user, event_type: event_type)
