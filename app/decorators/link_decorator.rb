@@ -20,7 +20,7 @@ class LinkDecorator < Draper::Decorator
 
   def render_remove_link
     if h.current_user.id == user_id ||
-       h.current_user.position == Position.find_by(name: 'Secretary')
+       h.current_user.position == Position.find_by(name: User::SECRETARY)
       h.link_to('remove', h.deactivate_link_path(link), method: :post,
                 class: 'btn btn-xs btn-danger')
     end

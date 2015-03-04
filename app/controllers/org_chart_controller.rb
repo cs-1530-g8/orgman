@@ -1,5 +1,5 @@
 class OrgChartController < ApplicationController
-  before_action -> { user_has_position("Secretary") }, only: [:create, :destroy]
+  before_action -> { user_has_position(User::SECRETARY) }, only: [:create, :destroy]
   before_action :authenticate_user!
 
   def index

@@ -1,7 +1,7 @@
 class Admin::UsersController < ApplicationController
 
   before_filter :authenticate_user!
-  before_action -> { user_has_position("Secretary") }
+  before_action -> { user_has_position(User::SECRETARY) }
 
   #### Pending Approvals #######################################################
 

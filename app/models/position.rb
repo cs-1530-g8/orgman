@@ -5,7 +5,7 @@ class Position < ActiveRecord::Base
 
   # Scopes #####################################################################
 
-  scope :exec,             -> { where(event_type_id: nil) }
+  scope :exec, -> { where(event_type_id: nil) }
   scope :event_type_admin, -> { where(name: nil) }
 
   # Associations ###############################################################
@@ -17,7 +17,7 @@ class Position < ActiveRecord::Base
 
   def default_position?
     is_default_position = false
-    default_exec = ['Secretary', 'President', 'Treasurer']
+    default_exec = [User::SECRETARY, User::PRESIDENT, User::TREASURER]
     default_event_type_admin = [1]
 
     default_exec.each do |p|

@@ -18,10 +18,10 @@ standard_user = User.create!(first_name: 'Drew', last_name: 'Land',
                              status: 'active')
 
 # Create the defailt exec positions and assign all to the default user
-Position.create(name: 'Secretary', user_id: 1)
-Position.create(name: 'President', user_id: 1)
-Position.create(name: 'Treasurer', user_id: 1)
+Position.create(name: User::SECRETARY, user: admin)
+Position.create(name: User::PRESIDENT, user: admin)
+Position.create(name: User::TREASURER, user: admin)
 
 # Create the default event type and assign user 2 as it's admin
-EventType.create(name: 'Miscellaneous')
-Position.create(user_id: 2, event_type_id: 1)
+event_type = EventType.create(name: 'Miscellaneous')
+Position.create(user: standard_user, event_type: event_type)

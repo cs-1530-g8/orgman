@@ -1,6 +1,10 @@
 class User < ActiveRecord::Base
   # Constants ##################################################################
 
+  SECRETARY = "Secretary"
+  PRESIDENT = "President"
+  TREASURER = "Treasurer"
+
   # Validations ################################################################
 
   validates :first_name, presence: true, length: { maximum: 50 }
@@ -62,7 +66,7 @@ class User < ActiveRecord::Base
   end
 
   def valid_event_types
-    if position == Position.find_by(name: "Secretary")
+    if position == Position.find_by(name: User::SECRETARY)
       EventType.all
     else
       [position.event_type]
