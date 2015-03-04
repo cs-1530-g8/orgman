@@ -1,5 +1,5 @@
 class OrgChartController < ApplicationController
-  before_action -> { user_has_position(User::SECRETARY) }, only: [:create, :destroy]
+  before_action -> { user_has_position(User::SECRETARY) }, except: [:index]
   before_action :authenticate_user!
 
   def index
@@ -33,7 +33,7 @@ class OrgChartController < ApplicationController
       success = user.update(user_params)
     else
       user = User.new(user_params_with_name)
-      user.status = "org_chart_dummy"
+      user.status = User::ORG_CHART_DUMMY
       user.email = ("a".."z").to_a.shuffle[0, 15].join
       success = user.save(validate: false)
     end
@@ -50,7 +50,7 @@ class OrgChartController < ApplicationController
     user = User.find(params[:user][:id])
 
     success = false
-    if user.status == "org_chart_dummy"
+    if user.status == User::ORG_CHART_DUMMY
       success = user.destroy
     else
       success = user.update(division: nil, parent_id: nil, extra_info: nil)

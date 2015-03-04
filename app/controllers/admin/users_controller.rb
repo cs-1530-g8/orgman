@@ -46,18 +46,13 @@ class Admin::UsersController < ApplicationController
 
   def update_status
     status = params[:status]
-    if status != 'alumni' && status != 'active' && status != 'inactive'
-      flash[:alert] = 'There was problem updating. Try again.'
-      redirect_to update_users_path
-    end
-
     user_ids = params[:users_to_update]
-    users_to_update = User.find(user_ids)
-    users_to_update.each do |user|
-      user.update(status: status)
+    users_to_update = User.where(id: user_ids)
+    if users_to_update.update_all(status: status)
+      flash[:notice] = "Statuses updated successfully."
+    else
+      flash[:alert] = "Sorry, there was an issue. Try again"
     end
-
-    flash[:notice] = 'Status updated successfully'
     redirect_to update_users_path
   end
 end

@@ -3,11 +3,11 @@
   .row
     %h1 Update User Status
     .col-md-4
-      = render partial: 'admin/users/status_update', locals: { title: 'To Inactive', status: 'inactive', users: User.active + User.alumni }
+      = render partial: 'admin/users/status_update', locals: { title: 'To Inactive', status: User::INACTIVE, users: User.active + User.alumni }
     .col-md-4
-      = render partial: 'admin/users/status_update', locals: { title: 'To Alumni', status: 'alumni', users: User.active + User.inactive }
+      = render partial: 'admin/users/status_update', locals: { title: 'To Alumni', status: User::ALUMNI, users: User.active + User.inactive }
     .col-md-4
-      = render partial: 'admin/users/status_update', locals: { title: 'To Active', status: 'active', users: User.alumni + User.inactive }
+      = render partial: 'admin/users/status_update', locals: { title: 'To Active', status: User::ACTIVE, users: User.alumni + User.inactive }
 
 .container
   .row
