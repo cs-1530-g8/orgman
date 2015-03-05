@@ -1,7 +1,7 @@
 var rollCallInit = function() {
   var index = 0;
   var options = $("#event_attendances_user_ids option");
-  var select_tag = $("#event_attendances_user_ids");
+  var selectTag = $("#event_attendances_user_ids");
   var selections = [];
 
   $("#display_roll_call").click(function() {
@@ -17,8 +17,8 @@ var rollCallInit = function() {
   $("#present").click(function () {
     if (index < options.length) {
       selections.push(options[index].value);
-      options.filter('[value="' + options[index].value + '"]')
-             .prop('selected', true);
+      options.filter("[value=\"" + options[index].value + "\"]")
+             .prop("selected", true);
     }
     nextName();
   });
@@ -28,7 +28,7 @@ var rollCallInit = function() {
       alert("You have reached the end of roll call!");
     } else {
       index++;
-      select_tag.val(selections).trigger("change");
+      selectTag.val(selections).trigger("change");
       if (index < options.length) {
         $("#name_display").text(options[index].text);
       }
@@ -37,4 +37,4 @@ var rollCallInit = function() {
 };
 
 $(document).ready(rollCallInit);
-$(document).on('page:load', rollCallInit);
+$(document).on("page:load", rollCallInit);
