@@ -36,6 +36,13 @@
             { selected: @event.attended_users.map { |user| user.id} },
             { multiple: true, class: 'select2', style: 'width: 75%',
               placeholder: 'Type or click to select attendees'}
+        %br
+        %a#display_roll_call Show/Hide Roll Call
+        #roll_call{style: 'display: none;'}
+          %div
+            %h3#name_display
+          %div.btn.btn-md.btn-success#present Present
+          %div.btn.btn-md.btn-warning#absent Absent
 
     .form-group
       .col-sm-2
