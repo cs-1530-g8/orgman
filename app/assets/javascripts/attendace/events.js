@@ -1,4 +1,4 @@
-$(function() {
+var rollCallInit = function() {
   var index = 0;
   var options = $("#event_attendances_user_ids option");
   var select_tag = $("#event_attendances_user_ids");
@@ -34,4 +34,7 @@ $(function() {
       }
     }
   }
-});
+};
+
+$(document).ready(rollCallInit);
+$(document).on('page:load', rollCallInit);
