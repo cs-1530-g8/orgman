@@ -19,6 +19,11 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+// Fix conflict between styles for the org chart and bootstrap
+.google-visualization-orgchart-table {
+  border-collapse: separate;
+}
+
 /* Copied from the bootstrap website
 -------------------------------------------------- */
 

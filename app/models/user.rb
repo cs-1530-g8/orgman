@@ -1,6 +1,16 @@
 class User < ActiveRecord::Base
   # Constants ##################################################################
 
+  SECRETARY = "Secretary"
+  PRESIDENT = "President"
+  TREASURER = "Treasurer"
+
+  ACTIVE = "active"
+  ALUMNI = "alumni"
+  PENDING = "pending"
+  INACTIVE = "inactive"
+  ORG_CHART_DUMMY = "org_chart_dummy"
+
   # Validations ################################################################
 
   validates :first_name, presence: true, length: { maximum: 50 }
@@ -22,25 +32,25 @@ class User < ActiveRecord::Base
   # Scopes #####################################################################
 
   scope :active, -> {
-    where("status = 'active'").sort_by { |u| [u.last_name, u.first_name] }
+    where(status: User::ACTIVE).sort_by { |u| [u.last_name, u.first_name] }
   }
   scope :alumni, -> {
-    where("status = 'alumni'").sort_by { |u| [u.last_name, u.first_name] }
+    where(status: User::ALUMNI).sort_by { |u| [u.last_name, u.first_name] }
   }
   scope :pending, -> {
-    where("status = 'pending'").sort_by { |u| [u.last_name, u.first_name] }
+    where(status: User::PENDING).sort_by { |u| [u.last_name, u.first_name] }
   }
   scope :inactive, -> {
-    where("status = 'inactive'").sort_by { |u| [u.last_name, u.first_name] }
+    where(status: User::INACTIVE).sort_by { |u| [u.last_name, u.first_name] }
   }
   scope :not_pending, -> {
-    where.not("status = 'pending'")
+    where.not(status: User::PENDING)
   }
   scope :org_chart_dummy, -> {
-    where("status = 'org_chart_dummy'")
+    where(status: User::ORG_CHART_DUMMY)
   }
   scope :unassigned_to_org_chart, -> {
-    where.not(status: 'pending').where(division: nil)
+    where.not(status: User::PENDING).where(division: nil)
   }
 
   # Associations ###############################################################
@@ -62,7 +72,7 @@ class User < ActiveRecord::Base
   end
 
   def valid_event_types
-    if position == Position.find_by(name: "Secretary")
+    if position == Position.find_by(name: User::SECRETARY)
       EventType.all
     else
       [position.event_type]

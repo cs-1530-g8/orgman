@@ -15,8 +15,8 @@
   %p= 'About: ' + (u.about.blank? ? '(none provided)' : u.about)
   %p= 'Profile Picture: '
   %p= image_tag u.avatar.url(:thumb), class: 'img-thumbnail'
-  %p= button_to 'Approve as Active', approve_user_path(id: u.id, approve: true, status: :active), class: 'btn btn-success'
-  %p= button_to 'Approve as Alumni', approve_user_path(id: u.id, approve: true, status: :alumni), class: 'btn btn-success'
+  %p= button_to 'Approve as Active', approve_user_path(id: u.id, approve: true, status: User::ACTIVE), class: 'btn btn-success'
+  %p= button_to 'Approve as Alumni', approve_user_path(id: u.id, approve: true, status: User::ALUMNI), class: 'btn btn-success'
   = form_tag reject_user_path do
     = hidden_field_tag :id, u.id
     .form-group

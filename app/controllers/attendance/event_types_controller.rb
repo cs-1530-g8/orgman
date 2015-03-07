@@ -1,6 +1,6 @@
 class Attendance::EventTypesController < ApplicationController
   before_action :authenticate_user!
-  before_filter -> { user_has_position("Secretary") }
+  before_filter -> { user_has_position(User::SECRETARY) }
 
   def index
     @event_types = EventType.all.decorate

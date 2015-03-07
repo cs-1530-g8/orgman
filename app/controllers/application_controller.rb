@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
 
     unless current_user && !current_user.position.nil? &&
            (current_user.position.event_type_id == event_type.id ||
-            current_user.position == Position.find_by(name: 'Secretary'))
+            current_user.position == Position.find_by(name: User::SECRETARY))
       flash[:notice] = "Sorry! You are not authorized to edit #{event_type.name}
                        events."
       redirect_to root_path
