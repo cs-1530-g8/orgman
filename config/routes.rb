@@ -29,6 +29,7 @@ Rails.application.routes.draw do
 
   root 'external#index'
   get 'dashboard' => 'dashboard', as: :dashboard
+  get 'site_map' => 'external#site_map', as: :site_map
 
   #### User Admin ##############################################################
   get 'pending_approvals' => 'admin/users#pending_approvals', as: :pending_approvals
