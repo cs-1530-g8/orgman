@@ -13,7 +13,7 @@ class Admin::UsersController < ApplicationController
     status = params[:status]
     user = User.find(params[:id])
     if user.update(approved: true, status: status)
-      #ApprovalMailer.accepted(user).deliver
+      # ApprovalMailer.accepted(user).deliver
       flash[:notice] = "#{user.name}'s request was accepted. They recieved a" +
         " welcome email."
     else
