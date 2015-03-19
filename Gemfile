@@ -33,6 +33,8 @@ group :development, :test do
   # Better Errors
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'coveralls', require: false
+  #gem "codeclimate-test-reporter", require: nil
 end
 
 group :development do
