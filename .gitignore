@@ -19,3 +19,6 @@
 
 # Ignore files uploade via paperclip
 /public/*
+
+# Ignore coverage folder
+/coverage/*
