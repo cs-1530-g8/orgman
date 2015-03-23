@@ -8,7 +8,6 @@ gem 'draper', '~>1.3'
 gem 'paperclip'
 gem 'rubocop', require: false
 gem 'bitly'
-gem 'google_visualr', '~> 2.4.0'
 
 # Authentication
 gem 'devise'
@@ -24,20 +23,20 @@ gem 'bootstrap-sass', '~> 3.2.0'
 gem 'bootstrap-sass-extras'
 gem 'autoprefixer-rails'
 gem 'select2-rails'
+gem 'google_visualr', '~> 2.4.0'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.2'
   gem 'sqlite3'
-  gem 'awesome_print'
-
-  # Better Errors
-  gem 'better_errors'
-  gem 'binding_of_caller'
+  gem 'factory_girl_rails'
   gem 'coveralls', require: false
-  #gem "codeclimate-test-reporter", require: nil
 end
 
 group :development do
+  # Better Errors
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'awesome_print'
   gem 'spring'
 end
 
@@ -46,10 +45,6 @@ group :test do
   gem 'capybara'
   gem 'capybara-webkit'
   gem 'database_cleaner'
-end
-
-group :development, :test do
-  gem 'factory_girl_rails'
 end
 
 group :production do
