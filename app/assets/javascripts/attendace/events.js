@@ -4,6 +4,10 @@ var rollCallInit = function() {
   var selectTag = $("#event_attendances_user_ids");
   var selections = [];
 
+  if (options.length === 0 || selectTag.length === 0) {
+    return;
+  }
+
   $("#display_roll_call").click(function() {
     $("#roll_call").toggle();
   });

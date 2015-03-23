@@ -4,4 +4,7 @@ class ExternalController < ApplicationController
       redirect_to dashboard_path
     end
   end
+
+  def site_map
+  end
 end

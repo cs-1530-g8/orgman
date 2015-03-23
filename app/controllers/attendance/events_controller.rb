@@ -52,7 +52,7 @@ class Attendance::EventsController < ApplicationController
 
   def update
     @event = Event.find(params[:id])
-    if @event.update_attributes(event_params)
+    if @event.update(event_params)
       @event.reload
 
       user_ids = params[:event][:attendances][:user_ids].reject{|s| s.blank?}

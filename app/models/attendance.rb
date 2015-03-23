@@ -30,7 +30,7 @@ class Attendance < ActiveRecord::Base
 
   def self.find_unfined
     Attendance.where.not(id: Fine.all.pluck(:attendance_id)).
-      where(excused: false, present: false,
+      where(excused: [false, nil], present: false,
             event_id: Event.find_fineable_event_ids)
   end
 end
