@@ -1,0 +1,26 @@
+%hr
+.bs-callout.bs-callout-info
+  %h4 Instructions
+  %ol
+    %li You can add new calendars below. You may only have one primary calendar at a time.
+    %li If you add a new calendar as primary it will replace the previous primary calendar. If you would like the change an existing calendar to the primary calendar, you must remove it and re-add it as a primary calendar.
+    %li Click the remove button to delete a calendar.
+%h2 Add a new calendar
+.col-md-8
+  =form_for(@new_calendar, html: {class: "form-horizontal"}) do |f|
+    .form-group
+      = f.label :name, "Calendar Name", class: "col-md-2"
+      .col-sm-10
+        = f.text_field :name, placeholder: "Example Calendar", class: "form-control"
+
+    .form-group
+      = f.label :url, "Calrndar URL", class: "col-md-2"
+      .col-sm-10
+        = f.text_field :url, placeholder: "http://example.com", class: "form-control"
+
+    .form-group
+      = f.label :primary, "Primary Calendar?", class: "col-md-2"
+      .col-sm-10
+        = f.check_box :primary
+
+    = f.submit class: "btn btn-primary"

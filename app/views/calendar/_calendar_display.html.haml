@@ -1,0 +1,7 @@
+- if @display_calendar.present?
+  %h3 #{@display_calendar.name} #{@display_calendar.render_destroy_link}
+  %iframe{src: "#{@display_calendar.url}", style: "border: 0;", width: 800, height: 600, frameborder: 0, scrolling: "no"}
+- else
+  .bs-callout.bs-callout-info
+    %h4 No calendars to display
+    %p Ask your administrator to add some calendars!
