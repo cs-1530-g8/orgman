@@ -63,6 +63,10 @@ class User < ActiveRecord::Base
 
   # Helpers ####################################################################
 
+  def has_position(position_string)
+    position.present? && position == position.find_by(name: position_string)
+  end
+
   def name
     "#{first_name} #{last_name}"
   end
