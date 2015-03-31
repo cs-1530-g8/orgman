@@ -23,7 +23,7 @@ class EventDecorator < Draper::Decorator
     if member.position.present? &&
        (member.position == Position.find_by(name: User::SECRETARY) ||
         member.position.event_type_id == object.event_type.id)
-      h.link_to " | (edit)", h.edit_event_path(object)
+       h.link_to "edit", h.edit_event_path(object), class: "btn btn-success btn-xs"
     end
   end
 
