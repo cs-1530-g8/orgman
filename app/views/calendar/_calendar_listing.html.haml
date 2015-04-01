@@ -1,0 +1,8 @@
+- if !@non_displayed_calendars.empty?
+  %h3 All Available Calendars
+  %table{ class: 'table table-striped' }
+    %th Name
+    - @non_displayed_calendars.each do |c|
+      %tr
+        %td #{link_to(c.name, calendar_path(c.id))} #{c.render_destroy_link}
+  %hr

@@ -63,4 +63,8 @@ Rails.application.routes.draw do
   get 'org_chart_admin' => 'org_chart#admin', as: 'org_chart_admin'
   post 'org_chart_create' => 'org_chart#create', as: 'org_chart/create'
   post 'org_chart_remove' => 'org_chart#remove', as: 'org_chart/remove'
+
+  #### Calendars ###############################################################
+  resources :calendars, controller: "calendar", only: [:index, :show, :create,
+                                                       :destroy]
 end
