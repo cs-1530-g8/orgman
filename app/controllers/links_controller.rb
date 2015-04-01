@@ -28,8 +28,8 @@ class LinksController < ApplicationController
 
   def deactivate
     link = Link.find(params[:id])
-    if link && link.user == current_user ||
-       current_user.position == Position.find_by(name: User::SECRETARY)
+    if link.present? && (link.user == current_user ||
+       current_user.has_position(User::SECRETARY))
       link.update(expiration: Date.today - 1)
     end
     redirect_to links_path

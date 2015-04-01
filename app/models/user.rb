@@ -64,7 +64,7 @@ class User < ActiveRecord::Base
   # Helpers ####################################################################
 
   def has_position(position_string)
-    position.present? && position == position.find_by(name: position_string)
+    position.present? && position == Position.find_by(name: position_string)
   end
 
   def name
@@ -76,7 +76,7 @@ class User < ActiveRecord::Base
   end
 
   def valid_event_types
-    if position == Position.find_by(name: User::SECRETARY)
+    if has_position(User::SECRETARY)
       EventType.all
     else
       [position.event_type]
