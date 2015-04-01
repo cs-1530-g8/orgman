@@ -4,8 +4,8 @@ class CalendarDecorator < Draper::Decorator
   def render_destroy_link
     if h.current_user.position.present? &&
        (h.current_user.position == Position.find_by(name: User::SECRETARY))
-      h.link_to "remove", h.calendar_path(object), { method: :delete,
-                                                class: "btn btn-danger btn-xs" }
+      h.link_to "remove", h.calendar_path(object),
+                method: :delete, class: "btn btn-danger btn-xs"
     end
   end
 
