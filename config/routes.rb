@@ -65,6 +65,6 @@ Rails.application.routes.draw do
   post 'org_chart_remove' => 'org_chart#remove', as: 'org_chart/remove'
 
   #### Calendars ###############################################################
-  resources :calendars, controller: 'calendar', only: [:index, :show, :create,
-                                                      :destroy]
+  resources :calendars, controller: "calendar", only: [:index, :show, :create,
+                                                       :destroy]
 end

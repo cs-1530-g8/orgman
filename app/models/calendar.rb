@@ -1,5 +1,4 @@
 class Calendar < ActiveRecord::Base
-
   # Constants ##################################################################
 
   # Validations ################################################################
@@ -29,8 +28,8 @@ class Calendar < ActiveRecord::Base
 
   def adjust_primary
     if Calendar.count == 0
-      self.primary = true
-    elsif self.primary
+      primary = true
+    elsif primary
       old_primary_calendar = Calendar.primary_calendar
       if old_primary_calendar.present?
         old_primary_calendar.update(primary: false)
