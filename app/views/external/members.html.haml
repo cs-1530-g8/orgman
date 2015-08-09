@@ -1,0 +1,7 @@
+- provide(:title, "Current Active Members")
+%h1 Current Active Members
+- @users.each do |u|
+  .col-md-5.member-listing
+    %h3= u.name
+    %p.col-md-3= image_tag u.avatar.url(:thumb), class: 'img-thumbnail'
+    %p.col-md-9= u.about
