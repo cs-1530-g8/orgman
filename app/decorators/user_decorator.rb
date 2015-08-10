@@ -28,6 +28,6 @@ class UserDecorator < Draper::Decorator
   end
 
   def parent_name
-    object.parent_id.present? ? User.find(parent_id).name : '[unknown]'
+    object.parent_id.present? ? User.find(parent_id).name : "[unknown]"
   end
 end
