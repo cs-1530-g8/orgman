@@ -41,6 +41,10 @@
       %p To change your profile picture talk to your admin.
 
     .form-group
+      = f.label :about, 'Short Bio'
+      = f.text_area :about, class: 'form-control', placeholder: resource.about
+
+    .form-group
       = f.label :two_p_number, '2P Number'
       = f.text_field :two_p_number, class: 'form-control', placeholder: resource.two_p_number
 

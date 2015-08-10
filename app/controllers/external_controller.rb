@@ -9,6 +9,6 @@ class ExternalController < ApplicationController
   end
 
   def members
-    @users = User.active
+    @users = UserDecorator.decorate_collection(User.active)
   end
 end

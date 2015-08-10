@@ -3,5 +3,9 @@
 - @users.each do |u|
   .col-md-5.member-listing
     %h3= u.name
-    %p.col-md-3= image_tag u.avatar.url(:thumb), class: 'img-thumbnail'
-    %p.col-md-9= u.about
+    .col-md-6
+      = image_tag u.avatar.url(:thumb), class: 'img-thumbnail'
+      %p Family: #{u.division}
+      %p Class: #{u.extra_info}
+      %p Big Brother: #{u.parent_name}
+    %p.col-md-6= u.about
