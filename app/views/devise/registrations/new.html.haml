@@ -38,14 +38,17 @@
       = f.text_field :two_p_number, autofocus: true, class: 'form-control', placeholder: '2P000634328011Z'
 
     .form-group
+      = f.label :about, 'Short Bio'
+      = f.text_area :about, autofocus: true, class: 'form-control', placeholder: 'Provide a short bio of not more than 150 characters. Give your major and expected graduation date'
+
+    .form-group
       = f.label :peoplesoft_number
       = f.number_field :peoplesoft_number, autofocus: true, class: 'form-control', placeholder: '3578411'
 
     .form-group
       = f.label :avatar, 'Profile Picture:'
+      %p Upload a square image for best results. Your picture will appear distorted otherwise.
       = f.file_field :avatar
 
     .form-group
       = f.submit 'Sign up', class: 'btn btn-lg btn-primary btn-block'
-
-    = render 'devise/shared/links'

@@ -27,4 +27,7 @@ class UserDecorator < Draper::Decorator
     not_required_attendance_ids_for_member.count
   end
 
+  def parent_name
+    object.parent_id.present? ? User.find(parent_id).name : "[unknown]"
+  end
 end

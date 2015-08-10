@@ -7,4 +7,8 @@ class ExternalController < ApplicationController
 
   def site_map
   end
+
+  def members
+    @users = UserDecorator.decorate_collection(User.active)
+  end
 end
