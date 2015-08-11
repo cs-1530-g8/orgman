@@ -1,11 +1,19 @@
 - provide(:title, "Current Active Members")
 %h1 Current Active Members
 - @users.each do |u|
-  .col-md-5.member-listing
-    %h3= u.name
-    .col-md-6
+  .col-md-5.row.member-listing
+    .col-sm-12
+      %h3= u.name
+    .col-sm-6
       = image_tag u.avatar.url(:thumb), class: 'img-thumbnail'
-      %p Family: #{u.division}
-      %p Class: #{u.extra_info}
-      %p Big Brother: #{u.parent_name}
-    %p.col-md-6= u.about
+    .col-sm-6
+      %p= u.about
+    .col-sm-12
+      %p
+        <strong> Family: </strong> #{u.division}
+        %br
+        <strong> Class: </strong> #{u.extra_info}
+        %br
+        <strong> Big Brother: </strong> #{u.parent_name}
+        %br
+        <strong> Position: </strong> #{u.position_name}

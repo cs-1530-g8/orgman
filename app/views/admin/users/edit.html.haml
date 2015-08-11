@@ -1,0 +1,56 @@
+- provide(:title, "Edit User")
+
+= form_for(@user) do |f|
+
+  .col-sm-4
+    %h2.form-signin-heading Edit profile
+
+    .form-group
+      = f.label :email
+      = f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'Email Address'
+
+    .form-group
+      = f.label :password, 'New password'
+      = f.password_field :password, autocomplete: 'off', class: 'form-control', placeholder: 'Leave blank if you dont want to change it'
+
+    .form-group
+      = f.label :password_confirmation, 'Confirm new password'
+      = f.password_field :password_confirmation, autocomplete: 'off', class: 'form-control', placeholder: 'Leave blank if you dont want to change it'
+
+    .form-group
+      = f.label :first_name
+      = f.text_field :first_name, class: 'form-control', placeholder: @user.first_name
+
+    .form-group
+      = f.label :last_name
+      = f.text_field :last_name, class: 'form-control', placeholder: @user.last_name
+
+    .form-group
+      = f.label :phone_number, 'Phone number (no digit seperators)'
+      = f.phone_field :phone_number, class: 'form-control', placeholder: @user.phone_number
+
+    .form-group
+      = f.label :address
+      = f.text_field :address, class: 'form-control', placeholder: @user.address
+
+    %hr
+    %h4 Undergrads Only:
+    .form-group
+      = f.label :avatar, 'Profile Picture'
+      %p= image_tag(@user.avatar.url(:thumb), class: "img-thumbnail")
+      %p Upload a square image for best results. Your picture will appear distorted otherwise.
+      = f.file_field :avatar
+
+    .form-group
+      = f.label :about, 'Short Bio'
+      = f.text_area :about, class: 'form-control', placeholder: @user.about
+
+    .form-group
+      = f.label :two_p_number, '2P Number'
+      = f.text_field :two_p_number, class: 'form-control', placeholder: @user.two_p_number
+
+    .form-group
+      = f.label :peoplesoft_number
+      = f.number_field :peoplesoft_number, class: 'form-control', placeholder: @user.peoplesoft_number
+
+    = f.submit 'Update', class: 'btn btn-lg btn-primary'
