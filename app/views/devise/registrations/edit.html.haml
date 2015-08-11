@@ -38,11 +38,6 @@
     %hr
     %h4 Undergrads Only:
     .form-group
-      = f.label :avatar, 'Profile Picture'
-      %p Upload a square image for best results. Your picture will appear distorted otherwise.
-      = f.file_field :avatar
-
-    .form-group
       = f.label :about, 'Short Bio'
       = f.text_area :about, class: 'form-control', placeholder: resource.about
 

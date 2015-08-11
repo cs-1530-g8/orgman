@@ -30,3 +30,28 @@
       %p These positions correlate to event types. A user may be assigned to manage a specific event type.
       %p Leave the user blank if you want to be the sole administrator of an event type.
     = render partial: 'admin/users/position_update', collection: @event_type_admins, as: :position
+
+.container
+  %hr
+  %h1 Edit User Profile Information
+  .col-md-4
+    %h3 Active
+    %table.table.table-striped
+      %th ID
+      %th Name
+      %th Edit Link
+      = render partial: 'admin/users/user_edit', collection: User.active, as: :user
+  .col-md-4
+    %h3 Inactive
+    %table.table.table-striped
+      %th ID
+      %th Name
+      %th Edit Link
+      = render partial: 'admin/users/user_edit', collection: User.inactive, as: :user
+  .col-md-4
+    %h3 Alumni
+    %table.table.table-striped
+      %th ID
+      %th Name
+      %th Edit Link
+      = render partial: 'admin/users/user_edit', collection: User.alumni, as: :user
