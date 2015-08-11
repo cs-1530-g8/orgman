@@ -48,9 +48,12 @@ class Admin::UsersController < ApplicationController
     end
 
     user = User.find(params[:id])
-    user.update(user_params)
+    if user.update(user_params)
+      flash[:notice] = "Updating #{user.name} successful."
+    else
+      flash[:alert] = "Updating #{user.name} failed."
+    end
 
-    flash[:notice] = "Updating #{user.name} successful."
     redirect_to edit_user_path(user)
   end
 
