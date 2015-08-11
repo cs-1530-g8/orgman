@@ -36,6 +36,24 @@ class Admin::UsersController < ApplicationController
     redirect_to(pending_approvals_path)
   end
 
+  #### Edit Users ##############################################################
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def update
+    if params[:user][:password].blank?
+      params[:user].delete(:password)
+      params[:user].delete(:password_confirmation)
+    end
+
+    user = User.find(params[:id])
+    user.update(user_params)
+
+    flash[:notice] = "Updating #{user.name} successful."
+    redirect_to edit_user_path(user)
+  end
+
   #### Update Users ############################################################
 
   def update_users
@@ -54,5 +72,14 @@ class Admin::UsersController < ApplicationController
       flash[:alert] = "Sorry, there was an issue. Try again"
     end
     redirect_to update_users_path
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:first_name, :last_name, :email, :password,
+                                 :password_confirmation, :peoplesoft_number,
+                                 :two_p_number, :address, :phone_number, :about,
+                                 :avatar)
   end
 end
