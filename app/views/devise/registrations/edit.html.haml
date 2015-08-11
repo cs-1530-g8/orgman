@@ -37,6 +37,11 @@
 
     %hr
     %h4 Undergrads Only:
+
+    .form-group
+      %p <strong> Profile Picture </strong>
+      %p To edit your profile picture, talk to your administrator.
+
     .form-group
       = f.label :about, 'Short Bio'
       = f.text_area :about, class: 'form-control', placeholder: resource.about

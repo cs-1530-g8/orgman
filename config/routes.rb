@@ -39,7 +39,7 @@ Rails.application.routes.draw do
   get  'update_users'     => 'admin/users#update_users',      as: :update_users
   post 'update_status'    => 'admin/users#update_status',     as: :update_status
   resources :positions, controller: 'admin/positions', only: [ :create, :update, :destroy ]
-  resources :users, controller: 'admin/users', only: [ :edit, :update ]
+  resources :users, controller: "admin/users", only: [:edit, :update]
 
   #### Quick Links #############################################################
   resources :links, except: [:show, :destroy, :edit, :update, :new] do
