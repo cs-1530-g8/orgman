@@ -25,6 +25,12 @@ gem 'autoprefixer-rails'
 gem 'select2-rails'
 gem 'google_visualr', '~> 2.4.0'
 
+# Capistrano
+gem 'capistrano', '~> 3.1.0'
+gem 'capistrano-bundler', '~> 1.1.2'
+gem 'capistrano-rails', '~> 1.1.1'
+gem 'capistrano-rbenv', github: "capistrano/rbenv"
+
 group :development, :test do
   gem 'rspec-rails', '~> 3.2'
   gem 'sqlite3'
