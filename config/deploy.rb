@@ -6,6 +6,7 @@ set :repo_url, 'git@github.com:valleyjo/orgman.git'
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
+set :branch, 'av/deploy'
 
 # Default deploy_to directory is /var/www/my_app
 set :deploy_to, '/home/azureuser/orgman'
